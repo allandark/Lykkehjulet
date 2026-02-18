@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://x7elnxdd4lxq"]
+
+[ext_resource type="Script" uid="uid://cinh1m6ijn8o0" path="res://scripts/wheel/wheel_node.gd" id="1_rkx32"]
+[ext_resource type="PackedScene" uid="uid://ddwf6i2111jop" path="res://nodes/wedge_node.tscn" id="2_62awy"]
+[ext_resource type="Script" uid="uid://buqv2d8enf5vd" path="res://scripts/wheel/needle_graphics.gd" id="2_qsk38"]
+[ext_resource type="Script" uid="uid://dttw0hetq0kq0" path="res://scripts/wheel/wheel_graphics.gd" id="3_rkx32"]
+
+[node name="Wheel" type="Node2D" node_paths=PackedStringArray("wheel_node")]
+script = ExtResource("1_rkx32")
+wheel_node = NodePath("WheelNode")
+
+[node name="Needle" type="Node2D" parent="." node_paths=PackedStringArray("polygon")]
+script = ExtResource("2_qsk38")
+polygon = NodePath("Polygon2D")
+
+[node name="Polygon2D" type="Polygon2D" parent="Needle"]
+
+[node name="WheelNode" type="Node2D" parent="."]
+script = ExtResource("3_rkx32")
+wedge_scene = ExtResource("2_62awy")

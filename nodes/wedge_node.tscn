@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddwf6i2111jop"]
+
+[ext_resource type="Script" uid="uid://chsx442q7h1n3" path="res://scripts/wheel/wedge_node.gd" id="1_kd7qd"]
+
+[sub_resource type="FontFile" id="FontFile_kd7qd"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/22/0/ascent = 0.0
+cache/0/22/0/descent = 0.0
+cache/0/22/0/underline_position = 0.0
+cache/0/22/0/underline_thickness = 0.0
+cache/0/22/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kd7qd"]
+line_spacing = 0.0
+font = SubResource("FontFile_kd7qd")
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+outline_size = 2
+shadow_color = Color(0.03529412, 0.03529412, 0.03529412, 0.77254903)
+
+[node name="Wedge" type="Node2D" node_paths=PackedStringArray("label", "polygon")]
+script = ExtResource("1_kd7qd")
+label = NodePath("Label")
+polygon = NodePath("Polygon2D")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_kd7qd")

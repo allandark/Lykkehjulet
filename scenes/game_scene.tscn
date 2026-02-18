@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4g2trr2fk45n"]
+
+[ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/wheel_node.tscn" id="1_w5aja"]
+[ext_resource type="Script" uid="uid://dsjvl8l3c1548" path="res://scripts/game_manager.gd" id="2_onqr8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_onqr8"]
+font_size = 61
+font_color = Color(1, 1, 0, 1)
+outline_size = 13
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_onqr8")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.595
+offset_right = -870.0
+offset_bottom = -517.0
+grow_horizontal = 2
+text = "Lykkehjulet"
+label_settings = SubResource("LabelSettings_onqr8")
+horizontal_alignment = 1
+
+[node name="Wheel" parent="." instance=ExtResource("1_w5aja")]
+position = Vector2(940, 759)
+
+[node name="test" type="Label" parent="."]
+layout_mode = 0
+offset_left = 367.0
+offset_top = 117.0
+offset_right = 424.0
+offset_bottom = 140.0
+text = "Winner: "

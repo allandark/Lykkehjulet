@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4g2trr2fk45n"]
+
+[ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/wheel_node.tscn" id="1_w5aja"]
+[ext_resource type="Script" uid="uid://dsjvl8l3c1548" path="res://scripts/game_manager.gd" id="2_onqr8"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 452.0
+offset_top = 25.0
+offset_right = 542.0
+offset_bottom = 48.0
+text = "Lykkehjulet"
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_onqr8")
+
+[node name="Wheel" parent="." instance=ExtResource("1_w5aja")]
+position = Vector2(499, 223)
