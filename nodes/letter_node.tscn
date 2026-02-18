@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://bda62veltsrwr"]
+
+[ext_resource type="Texture2D" uid="uid://7oeoqk6w0ksf" path="res://textures/letter_bg.png" id="1_antxc"]
+[ext_resource type="Script" uid="uid://cofklyae6u43a" path="res://scripts/letter_grid/letter_node.gd" id="1_rprtv"]
+[ext_resource type="Texture2D" uid="uid://by8e3lood3xi1" path="res://textures/letter_hidden.png" id="2_rprtv"]
+[ext_resource type="Texture2D" uid="uid://byenhrjn8s27s" path="res://textures/border.png" id="3_8y6hk"]
+[ext_resource type="Texture2D" uid="uid://bkihnrk3g7lb2" path="res://textures/letter_unused.png" id="4_8y6hk"]
+
+[sub_resource type="FontFile" id="FontFile_mw25s"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/200/0/ascent = 0.0
+cache/0/200/0/descent = 0.0
+cache/0/200/0/underline_position = 0.0
+cache/0/200/0/underline_thickness = 0.0
+cache/0/200/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_tcjrq"]
+line_spacing = 0.0
+font = SubResource("FontFile_mw25s")
+font_size = 200
+font_color = Color(0, 0, 0, 1)
+
+[node name="Letter" type="Button" node_paths=PackedStringArray("label", "hidden_rect", "unused_rect")]
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+flat = true
+script = ExtResource("1_rprtv")
+label = NodePath("label")
+hidden_rect = NodePath("TextureLetterHidden")
+unused_rect = NodePath("TextureLetterUnused")
+
+[node name="TextureLetterBG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.156, 0.156)
+texture = ExtResource("1_antxc")
+
+[node name="label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 254.0
+offset_bottom = 267.0
+scale = Vector2(0.156, 0.149)
+text = "A"
+label_settings = SubResource("LabelSettings_tcjrq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureLetterHidden" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.156, 0.156)
+texture = ExtResource("2_rprtv")
+
+[node name="TextureLetterUnused" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.156, 0.156)
+texture = ExtResource("4_8y6hk")
+
+[node name="TextureLetterBorder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.156, 0.156)
+texture = ExtResource("3_8y6hk")

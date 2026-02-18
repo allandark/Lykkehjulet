@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
         if rotation_speed <= 0.01:            
             rotation_speed = 0.0
             spinning = false
+            end_rotation = wheel_node.rotation 
             _on_spin_finished()
             return
         wheel_node.rotation += rotation_speed * delta
@@ -29,10 +30,8 @@ func _process(delta: float) -> void:
 
 func _on_spin_finished() -> void:   
     var segments = WheelConfig.wedges.size()
-    end_rotation = wheel_node.rotation
-     # Needle points at top (Godot y-axis up is -PI/2 radians)
+    
     var needle_offset = PI / 2  # top
-
     # Calculate the wheel rotation relative to the needle
     var rotation_relative_to_needle = fposmod(end_rotation + needle_offset, TAU)
     var angle_step = TAU / segments

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccgurnuitedh6"]
+
+[ext_resource type="Script" uid="uid://c0ebo4qw7wf3u" path="res://scripts/letter_grid/letter_grid.gd" id="1_frrug"]
+[ext_resource type="PackedScene" uid="uid://bda62veltsrwr" path="res://nodes/letter_node.tscn" id="2_qvn47"]
+
+[node name="LetterGrid" type="Control" node_paths=PackedStringArray("letter_rows")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_frrug")
+letter_rows = [NodePath("VBoxContainer/HBoxContainer1"), NodePath("VBoxContainer/HBoxContainer2"), NodePath("VBoxContainer/HBoxContainer3"), NodePath("VBoxContainer/HBoxContainer4")]
+letter_scene = ExtResource("2_qvn47")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
