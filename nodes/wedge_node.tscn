@@ -26,13 +26,34 @@ cache/0/22/0/descent = 0.0
 cache/0/22/0/underline_position = 0.0
 cache/0/22/0/underline_thickness = 0.0
 cache/0/22/0/scale = 1.0
+cache/0/23/0/ascent = 0.0
+cache/0/23/0/descent = 0.0
+cache/0/23/0/underline_position = 0.0
+cache/0/23/0/underline_thickness = 0.0
+cache/0/23/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/25/0/ascent = 0.0
+cache/0/25/0/descent = 0.0
+cache/0/25/0/underline_position = 0.0
+cache/0/25/0/underline_thickness = 0.0
+cache/0/25/0/scale = 1.0
+cache/0/26/0/ascent = 0.0
+cache/0/26/0/descent = 0.0
+cache/0/26/0/underline_position = 0.0
+cache/0/26/0/underline_thickness = 0.0
+cache/0/26/0/scale = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_kd7qd"]
 line_spacing = 0.0
 font = SubResource("FontFile_kd7qd")
-font_size = 22
+font_size = 26
 font_color = Color(0, 0, 0, 1)
-outline_size = 2
+outline_size = 4
+shadow_size = 0
 shadow_color = Color(0.03529412, 0.03529412, 0.03529412, 0.77254903)
 
 [node name="Wedge" type="Node2D" node_paths=PackedStringArray("label", "polygon")]
@@ -46,3 +67,5 @@ polygon = NodePath("Polygon2D")
 offset_right = 40.0
 offset_bottom = 23.0
 label_settings = SubResource("LabelSettings_kd7qd")
+horizontal_alignment = 1
+vertical_alignment = 1

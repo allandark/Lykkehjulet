@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://pyjn7cff6j78"]
+
+[ext_resource type="Script" uid="uid://chctmkb7vb48y" path="res://scripts/ui/player_panel.gd" id="1_fe7bs"]
+[ext_resource type="PackedScene" uid="uid://dy0enhk6e2gr4" path="res://nodes/ui/player_container.tscn" id="2_fe7bs"]
+
+[node name="RightPlayerPanel" type="Panel" node_paths=PackedStringArray("players")]
+anchors_preset = -1
+anchor_left = 0.896
+anchor_top = 0.328
+anchor_right = 1.0
+anchor_bottom = 0.71900004
+offset_left = -0.32006836
+offset_top = -0.24002075
+offset_bottom = 1.4799805
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_fe7bs")
+players = [NodePath("VBoxContainer/Player1"), NodePath("VBoxContainer/Player2"), NodePath("VBoxContainer/Player3"), NodePath("VBoxContainer/Player4")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -212.0
+offset_right = 100.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Player1" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
+layout_mode = 2
+
+[node name="Player2" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
+layout_mode = 2
+player_color = Color(1, 0, 0, 1)
+
+[node name="Player3" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
+layout_mode = 2
+player_color = Color(0, 1, 0, 1)
+
+[node name="Player4" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
+layout_mode = 2
+player_color = Color(1, 1, 0, 1)

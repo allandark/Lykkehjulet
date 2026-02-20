@@ -1,0 +1,237 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy0enhk6e2gr4"]
+
+[ext_resource type="FontFile" uid="uid://c8esr4uscmqdr" path="res://fonts/digital-7 (mono).ttf" id="1_7afkn"]
+[ext_resource type="Script" uid="uid://jt3c1q1faika" path="res://scripts/ui/player_container.gd" id="1_ro36e"]
+
+[sub_resource type="FontFile" id="FontFile_7afkn"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/19/0/ascent = 0.0
+cache/0/19/0/descent = 0.0
+cache/0/19/0/underline_position = 0.0
+cache/0/19/0/underline_thickness = 0.0
+cache/0/19/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/21/0/ascent = 0.0
+cache/0/21/0/descent = 0.0
+cache/0/21/0/underline_position = 0.0
+cache/0/21/0/underline_thickness = 0.0
+cache/0/21/0/scale = 1.0
+cache/0/22/0/ascent = 0.0
+cache/0/22/0/descent = 0.0
+cache/0/22/0/underline_position = 0.0
+cache/0/22/0/underline_thickness = 0.0
+cache/0/22/0/scale = 1.0
+cache/0/23/0/ascent = 0.0
+cache/0/23/0/descent = 0.0
+cache/0/23/0/underline_position = 0.0
+cache/0/23/0/underline_thickness = 0.0
+cache/0/23/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ro36e"]
+font = SubResource("FontFile_7afkn")
+font_size = 23
+font_color = Color(0, 0, 0, 1)
+outline_size = 5
+
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("bg_color_rect", "border_rect", "label", "digit_lavels")]
+offset_right = 196.0
+offset_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ro36e")
+player_color = Color(0, 0, 1, 1)
+bg_color_rect = NodePath("CenterContainer/MarginContainer/ColorRect")
+border_rect = NodePath("ColorRect")
+label = NodePath("CenterContainer/MarginContainer/VBoxContainer/Label")
+digit_lavels = [NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5/Label")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Name"
+label_settings = SubResource("LabelSettings_ro36e")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Digit" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6392157)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_7afkn")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Digit2" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6392157)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_7afkn")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Digit3" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6392157)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_7afkn")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Digit4" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6392157)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_7afkn")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Digit5" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6392157)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_7afkn")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

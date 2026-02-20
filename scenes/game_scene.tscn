@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4g2trr2fk45n"]
+[gd_scene load_steps=9 format=3 uid="uid://b4g2trr2fk45n"]
 
+[ext_resource type="Texture2D" uid="uid://3b3mj04t5ayi" path="res://textures/bgimage.png" id="1_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/wheel_node.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://dsjvl8l3c1548" path="res://scripts/game_manager.gd" id="2_onqr8"]
 [ext_resource type="PackedScene" uid="uid://ccgurnuitedh6" path="res://nodes/letter_grid.tscn" id="3_ycayy"]
+[ext_resource type="PackedScene" uid="uid://pyjn7cff6j78" path="res://nodes/ui/right_player_panel.tscn" id="4_rurhu"]
+[ext_resource type="PackedScene" uid="uid://svrjg0cwht6i" path="res://nodes/ui/info_box.tscn" id="5_rurhu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_onqr8"]
 font_size = 61
@@ -10,42 +13,109 @@ font_color = Color(1, 1, 0, 1)
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rurhu"]
+
 [node name="Root" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 768.0
-offset_bottom = 432.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("wheel", "info_box")]
 script = ExtResource("2_onqr8")
+wheel = NodePath("../WheelAnchor/Wheel")
+info_box = NodePath("../InfoPanel/InfoBox")
 
-[node name="Label" type="Label" parent="."]
+[node name="BG image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bw6k5")
+
+[node name="Title" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.595
-offset_right = -870.0
-offset_bottom = -517.0
+offset_left = -170.5
+offset_right = 170.5
+offset_bottom = -289.56003
 grow_horizontal = 2
 text = "Lykkehjulet"
 label_settings = SubResource("LabelSettings_onqr8")
 horizontal_alignment = 1
 
-[node name="Wheel" parent="." instance=ExtResource("1_w5aja")]
-position = Vector2(940, 759)
-
-[node name="test" type="Label" parent="."]
-layout_mode = 0
-offset_left = 367.0
-offset_top = 117.0
-offset_right = 424.0
-offset_bottom = 140.0
-text = "Winner: "
-
 [node name="LetterGrid" parent="." instance=ExtResource("3_ycayy")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 110.0
+offset_right = 0.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(0, 0)
+
+[node name="RightPlayerPanel" parent="." instance=ExtResource("4_rurhu")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = 0.0
+offset_bottom = 0.0
+
+[node name="InfoPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.67
+anchor_right = 0.15
+anchor_bottom = 0.915
+offset_right = 39.199997
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rurhu")
+
+[node name="InfoBox" parent="InfoPanel" instance=ExtResource("5_rurhu")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.319
+anchor_right = 1.7360001
+anchor_bottom = 1.2260001
+offset_top = -0.007461548
+offset_right = -188.01923
+offset_bottom = -79.999664
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="WheelAnchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -288.0
+offset_right = 317.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="WheelAnchor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5803922)
+
+[node name="Wheel" parent="WheelAnchor" instance=ExtResource("1_w5aja")]

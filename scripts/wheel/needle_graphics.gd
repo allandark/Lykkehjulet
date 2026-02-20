@@ -8,5 +8,5 @@ func _ready():
         Vector2(10, -WheelConfig.radius - 10)   # right base
     ])
     polygon.color = Color.WHITE
-    polygon.z_index = 11
+    polygon.z_index = 40
 
