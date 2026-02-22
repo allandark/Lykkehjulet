@@ -6,6 +6,7 @@ Logic:
 [] ingen duplicate kategorier
 [x] joker-implenteret
 [] hvilken spiller efter vunden runde
+[] tilfældig start spiller
 
 start_screen:
 [] vælg spillere/ give navne
