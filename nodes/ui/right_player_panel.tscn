@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://chctmkb7vb48y" path="res://scripts/ui/player_panel.gd" id="1_fe7bs"]
 [ext_resource type="PackedScene" uid="uid://dy0enhk6e2gr4" path="res://nodes/ui/player_container.tscn" id="2_fe7bs"]
 
-[node name="RightPlayerPanel" type="Panel" node_paths=PackedStringArray("players")]
+[node name="RightPlayerPanel" type="Panel" node_paths=PackedStringArray("vbox")]
 anchors_preset = -1
 anchor_left = 0.896
 anchor_top = 0.328
@@ -15,7 +15,8 @@ offset_bottom = 1.4799805
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("1_fe7bs")
-players = [NodePath("VBoxContainer/Player1"), NodePath("VBoxContainer/Player2"), NodePath("VBoxContainer/Player3"), NodePath("VBoxContainer/Player4")]
+player_container = ExtResource("2_fe7bs")
+vbox = NodePath("VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -32,18 +33,3 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
 alignment = 1
-
-[node name="Player1" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
-layout_mode = 2
-
-[node name="Player2" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
-layout_mode = 2
-player_color = Color(1, 0, 0, 1)
-
-[node name="Player3" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
-layout_mode = 2
-player_color = Color(0, 1, 0, 1)
-
-[node name="Player4" parent="VBoxContainer" instance=ExtResource("2_fe7bs")]
-layout_mode = 2
-player_color = Color(1, 1, 0, 1)

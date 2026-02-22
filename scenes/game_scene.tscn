@@ -1,19 +1,66 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4g2trr2fk45n"]
+[gd_scene load_steps=12 format=3 uid="uid://b4g2trr2fk45n"]
 
 [ext_resource type="Texture2D" uid="uid://3b3mj04t5ayi" path="res://textures/bgimage.png" id="1_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/wheel_node.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://dsjvl8l3c1548" path="res://scripts/game_manager.gd" id="2_onqr8"]
 [ext_resource type="PackedScene" uid="uid://ccgurnuitedh6" path="res://nodes/letter_grid.tscn" id="3_ycayy"]
+[ext_resource type="PackedScene" uid="uid://bw24kj7vqesba" path="res://nodes/input_panel.tscn" id="4_kk2rg"]
 [ext_resource type="PackedScene" uid="uid://pyjn7cff6j78" path="res://nodes/ui/right_player_panel.tscn" id="4_rurhu"]
 [ext_resource type="PackedScene" uid="uid://svrjg0cwht6i" path="res://nodes/ui/info_box.tscn" id="5_rurhu"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_onqr8"]
-font_size = 61
-font_color = Color(1, 1, 0, 1)
-outline_size = 13
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="PackedScene" uid="uid://bf12r2thurlx4" path="res://nodes/ui/yes_no_modal.tscn" id="8_b5spy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rurhu"]
+
+[sub_resource type="FontFile" id="FontFile_rurhu"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/19/0/ascent = 0.0
+cache/0/19/0/descent = 0.0
+cache/0/19/0/underline_position = 0.0
+cache/0/19/0/underline_thickness = 0.0
+cache/0/19/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/21/0/ascent = 0.0
+cache/0/21/0/descent = 0.0
+cache/0/21/0/underline_position = 0.0
+cache/0/21/0/underline_thickness = 0.0
+cache/0/21/0/scale = 1.0
+cache/0/22/0/ascent = 0.0
+cache/0/22/0/descent = 0.0
+cache/0/22/0/underline_position = 0.0
+cache/0/22/0/underline_thickness = 0.0
+cache/0/22/0/scale = 1.0
+cache/0/23/0/ascent = 0.0
+cache/0/23/0/descent = 0.0
+cache/0/23/0/underline_position = 0.0
+cache/0/23/0/underline_thickness = 0.0
+cache/0/23/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kk2rg"]
+font = SubResource("FontFile_rurhu")
+font_size = 24
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -23,11 +70,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("wheel", "info_box")]
-script = ExtResource("2_onqr8")
-wheel = NodePath("../WheelAnchor/Wheel")
-info_box = NodePath("../InfoPanel/InfoBox")
-
 [node name="BG image" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -36,20 +78,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_bw6k5")
-
-[node name="Title" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -170.5
-offset_right = 170.5
-offset_bottom = -289.56003
-grow_horizontal = 2
-text = "Lykkehjulet"
-label_settings = SubResource("LabelSettings_onqr8")
-horizontal_alignment = 1
 
 [node name="LetterGrid" parent="." instance=ExtResource("3_ycayy")]
 layout_mode = 1
@@ -71,6 +99,11 @@ anchor_bottom = 0.5
 offset_left = -300.0
 offset_top = 0.0
 offset_bottom = 0.0
+
+[node name="InputPanel" parent="." instance=ExtResource("4_kk2rg")]
+layout_mode = 1
+offset_top = 188.0
+offset_bottom = 228.0
 
 [node name="InfoPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -95,6 +128,28 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 
+[node name="RoundPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 312.0
+offset_bottom = 134.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RoundPanel"]
+layout_mode = 2
+
+[node name="RoundLabel" type="Label" parent="RoundPanel/VBoxContainer"]
+layout_mode = 2
+text = "Runde: 0"
+label_settings = SubResource("LabelSettings_kk2rg")
+horizontal_alignment = 1
+
+[node name="CategoryLabel" type="Label" parent="RoundPanel/VBoxContainer"]
+layout_mode = 2
+text = "Kategori: "
+label_settings = SubResource("LabelSettings_kk2rg")
+horizontal_alignment = 1
+
 [node name="WheelAnchor" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -108,6 +163,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="WheelAnchor"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -119,3 +175,20 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5803922)
 
 [node name="Wheel" parent="WheelAnchor" instance=ExtResource("1_w5aja")]
+
+[node name="YesNoModal" parent="." instance=ExtResource("8_b5spy")]
+visible = false
+layout_mode = 1
+offset_top = -47.0
+offset_bottom = 47.0
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("wheel", "info_box", "input_panel", "player_panel", "round_label", "category_label", "letter_grid", "yes_no_modal")]
+script = ExtResource("2_onqr8")
+wheel = NodePath("../WheelAnchor/Wheel")
+info_box = NodePath("../InfoPanel/InfoBox")
+input_panel = NodePath("../InputPanel")
+player_panel = NodePath("../RightPlayerPanel")
+round_label = NodePath("../RoundPanel/VBoxContainer/RoundLabel")
+category_label = NodePath("../RoundPanel/VBoxContainer/CategoryLabel")
+letter_grid = NodePath("../LetterGrid")
+yes_no_modal = NodePath("../YesNoModal")

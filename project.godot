@@ -18,6 +18,7 @@ config/icon="res://textures/icon.svg"
 [autoload]
 
 WheelConfig="*res://scripts/config/wheel_config.gd"
+GameData="*res://scripts/config/game_data.gd"
 
 [debug]
 
@@ -26,8 +27,8 @@ settings/gdscript/always_track_local_variables=true
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=2
 
 [dotnet]

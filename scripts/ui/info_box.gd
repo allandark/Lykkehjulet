@@ -1,18 +1,18 @@
-extends ColorRect
+class_name InfoBox extends ColorRect
 
 @export var labels : Array[RichTextLabel]
 @export var buttons: Array[Button]
 
-var queue: Array = []        # queue of texts to type
-var full_text: String = ""   # current BBCode text being typed
+var queue: Array = []        
+var full_text: String = ""   
 var label_index: int = 0
 var char_index: int = 0
 var char_delay: float = 0.05
 var typing_timer: Timer
-var open_tags: Array = []    # keeps track of currently open BBCode tags
+var open_tags: Array = []   
 
-signal line_done(label_index)  # emitted when a line finishes typing
-signal all_done()              # emitted when the queue is empty
+signal line_done(label_index: int)  
+signal all_done()             
 signal on_spin()
 signal on_vokal()
 signal on_guess()
@@ -34,18 +34,18 @@ func _ready():
 	buttons[2].pressed.connect(func(): emit_signal("on_guess"))
 
 
-func set_button_state(value: bool):
+func set_button_states(value: bool):
 	buttons[0].disabled = !value
 	buttons[1].disabled = !value
 	buttons[2].disabled = !value
 
+func set_button_state(id: int, value: bool):
+	buttons[clamp(id, 0, 2)].disabled = !value
 
-# Add a new text to the queue
 func show_text(text: String, line: int):
 	var idx = clamp(line-1, 0, labels.size()-1)
 	queue.append({"text": text, "line": idx})
 	
-	# Start typing immediately if nothing is typing
 	if typing_timer.is_stopped():
 		_start_next()
 
@@ -57,7 +57,6 @@ func clear_line(line: int):
 	var idx = clamp(line-1, 0, labels.size()-1)
 	labels[idx].text = ""
 
-# Start next queued text
 func _start_next():
 		if queue.size() == 0:
 				emit_signal("all_done")
@@ -82,35 +81,29 @@ func _on_typing_tick():
 		var c = full_text[char_index]
 		char_index += 1
 
-		# Check for BBCode tag start
 		if c == "[":
 				var end = full_text.find("]", char_index)
 				if end != -1:
-						var tag = full_text.substr(char_index - 1, end - char_index + 2) # include []
+						var tag = full_text.substr(char_index - 1, end - char_index + 2) 
 						
 						if tag.begins_with("[/"):
-								# closing tag, remove matching opening tag
 								if open_tags.size() > 0:
-										# pop the most recent tag that matches
 										for i in range(open_tags.size()-1, -1, -1):
 												if open_tags[i].substr(1, open_tags[i].find("=")-1 if open_tags[i].find("=")!=-1 else open_tags[i].find("]")-1) in tag:
 														open_tags.remove_at(i)
 														break
 						else:
-								# opening tag
 								open_tags.append(tag)
 
 						labels[label_index].text += tag
 						char_index = end + 1
 						return
 
-		# Append character with temporary closing tags
 		var display_text = c
 		for tag in open_tags:
 				var tag_name = tag.substr(1, tag.find("=")-1) if tag.find("=") != -1 else tag.substr(1, tag.find("]")-1)
 				display_text += "[/" + tag_name + "]"
 
-		# Reopen tags for next character
 		for tag in open_tags:
 				display_text += tag
 

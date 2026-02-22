@@ -1,24 +1,21 @@
-extends Node
+class_name PlayerPanel extends Node
 
-@export var players : Array[Node]
+@export var players_containers : Array[Node]
 
+@export var player_container: PackedScene
+@export var vbox: VBoxContainer
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	players[0].set_balance(100)
-	players[0].set_player_name("Player1")
-	players[0].set_active(true)
+	
+	for player in GameData.players:
+		var instance = player_container.instantiate()
+		instance.set_player_name(player.name)
+		instance.set_balance(player.balance)
+		instance.player_color = player.color
+		instance.set_active(false)
+		vbox.add_child(instance)
+		players_containers.append(instance)
+	
 
-	players[1].set_balance(10000)
-	players[1].set_player_name("Player2")
-	players[1].set_active(false)
-
-	players[2].set_balance(1500)
-	players[2].set_player_name("Player3")
-	players[2].set_active(false)
-
-	players[3].set_balance(0)
-	players[3].set_player_name("Player4")
-	players[3].set_active(false)
 
 

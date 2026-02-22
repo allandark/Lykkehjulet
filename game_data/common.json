@@ -1,0 +1,113 @@
+{
+  "name": "Almindelig",
+  "categories": [
+    {
+      "name": "Udtryk",
+      "values": [
+        "En legende opgave",
+        "Bryde isen",
+        "Ram på sømmet",
+        "Ikke på toppen"
+      ]
+    },
+    {
+      "name": "Person",
+      "values": [
+        "Albert Einstein",
+        "Oprah Winfrey",
+        "Elon Musk",
+        "Taylor Swift"
+      ]
+    },
+    {
+      "name": "Sted",
+      "values": [
+        "New York City",
+        "Grand Canyon",
+        "Eiffeltårnet",
+        "Mount Everest"
+      ]
+    },
+    {
+      "name": "Ting",
+      "values": [
+        "Smartphone",
+        "Cykel",
+        "Kaffekop",
+        "Fly"
+      ]
+    },
+    {
+      "name": "Begivenhed",
+      "values": [
+        "Fødselsdags-fest",
+        "Bryllups-ceremoni",
+        "Olympiske Lege",
+        "Dimission"
+      ]
+    },
+    {
+      "name": "Mad & Drikke",
+      "values": [
+        "Spaghetti med kødboller",
+        "Chokoladekage",
+        "Lemonade",
+        "Sushi-rulle"
+      ]
+    },
+    {
+      "name": "Filmtitel",
+      "values": [
+        "Jurassic Park",
+        "Løvernes Konge",
+        "Titanic",
+        "Inception"
+      ]
+    },
+    {
+      "name": "TV Titel",
+      "values": [
+        "Friends",
+        "Breaking Bad",
+        "Stranger Things",
+        "Game of Thrones"
+      ]
+    },
+    {
+      "name": "Sangtitel",
+      "values": [
+        "Bohemian Rhapsody",
+        "Imagine",
+        "Thriller",
+        "Shape of You"
+      ]
+    },
+    {
+      "name": "Rundt i huset",
+      "values": [
+        "Stue Sofa",
+        "Køkkenbord",
+        "Badeværelses-spejl",
+        "Soveværelses-lampe"
+      ]
+    },
+    {
+      "name": "Erhverv",
+      "values": [
+        "Software-ingeniør",
+        "Brandmand",
+        "Professionel Kok",
+        "Astronaut"
+      ]
+    },
+    {
+      "name": "Rimtid",
+      "values": [
+        "Kat i hatten",
+        "Hurtig og vid",
+        "Klart lys",
+        "Syng og sving"
+      ]
+    }
+  ]
+}
