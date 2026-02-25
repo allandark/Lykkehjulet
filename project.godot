@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="Lykkehjulet"
-run/main_scene="uid://b4g2trr2fk45n"
+run/main_scene="uid://dbpap68x1uccd"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://textures/icon.svg"
 
 [autoload]
 
+MenuGlobals="*res://scripts/main_menu/menu_globals.gd"
 WheelConfig="*res://scripts/config/wheel_config.gd"
 GameData="*res://scripts/config/game_data.gd"
 

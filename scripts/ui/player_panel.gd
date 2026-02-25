@@ -1,4 +1,4 @@
-class_name PlayerPanel extends Node
+class_name PlayerPanel extends Control
 
 @export var players_containers : Array[Node]
 
@@ -15,7 +15,6 @@ func _ready() -> void:
 		instance.set_active(false)
 		vbox.add_child(instance)
 		players_containers.append(instance)
+
+	size = $VBoxContainer.size
 	
-
-
-

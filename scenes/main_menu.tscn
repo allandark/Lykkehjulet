@@ -1,0 +1,250 @@
+[gd_scene load_steps=16 format=3 uid="uid://dbpap68x1uccd"]
+
+[ext_resource type="Script" uid="uid://dpfg36wrjkqmx" path="res://scripts/main_menu/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://b2dr4veoiynpl" path="res://scripts/main_menu/player_setting_panel.gd" id="2_8ln24"]
+[ext_resource type="Texture2D" uid="uid://cgttbqto4vdki" path="res://textures/bg4.png" id="4_rtw2f"]
+[ext_resource type="Script" uid="uid://ck6ng7ylaok26" path="res://scripts/main_menu/game_settings_panel.gd" id="4_wu84c"]
+[ext_resource type="Texture2D" uid="uid://cfdp07p8tu6tr" path="res://textures/title_flat.png" id="5_oa1go"]
+[ext_resource type="PackedScene" uid="uid://ds7sk7y3rwox1" path="res://nodes/main_menu/cat_check_button.tscn" id="6_rtw2f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y057d"]
+font_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5bwc8"]
+font_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gny55"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PackedScene" id="PackedScene_rtw2f"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("PlayerSettingPanel", "custom_minimum_size", "offset_right", "offset_bottom", "size_flags_vertical", "script", "player_name_edit", "color_rect", "color_options", "sound_options", "play_button", "remove_button", "Panel", "ColorRect", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "color", "HBoxContainer", "anchor_left", "anchor_top", "offset_left", "offset_top", "PlayerLabel", "text", "label_settings", "Label", "PlayerLineEdit", "size_flags_horizontal", "theme_override_colors/font_outline_color", "theme_override_constants/outline_size", "max_length", "LineEdit", "ColorLabel", "ColorOptionButton", "z_index", "OptionButton", "SoundLabel", "SoundOptionButton", "selected", "item_count", "popup/item_0/text", "popup/item_0/id", "PlayButton", "focus_mode", "Button", "RemoveButton"),
+"node_count": 11,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 12, 0, -1, 11, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 1073741830, 5, 1073741831, 6, 1073741832, 7, 1073741833, 8, 1073741834, 9, 1073741835, 10, 0, 0, 0, 13, 13, -1, 7, 14, 11, 15, 12, 16, 13, 17, 13, 18, 14, 19, 14, 20, 15, 0, 0, 0, 21, 21, -1, 12, 14, 11, 15, 16, 22, 17, 23, 17, 16, 17, 17, 17, 24, 18, 25, 19, 2, 20, 3, 21, 18, 14, 19, 14, 0, 2, 0, 29, 26, -1, 3, 14, 14, 27, 22, 28, 23, 0, 2, 0, 35, 30, -1, 8, 1, 24, 14, 14, 31, 25, 4, 3, 32, 26, 33, 3, 27, 27, 34, 28, 0, 2, 0, 29, 36, -1, 3, 14, 14, 27, 29, 28, 30, 0, 2, 0, 39, 37, -1, 6, 38, 31, 14, 14, 31, 3, 4, 3, 32, 26, 33, 3, 0, 2, 0, 29, 40, -1, 3, 14, 14, 27, 32, 28, 33, 0, 2, 0, 39, 41, -1, 9, 14, 14, 31, 3, 4, 3, 32, 26, 33, 3, 42, 34, 43, 11, 44, 35, 45, 34, 0, 2, 0, 48, 46, -1, 7, 14, 14, 31, 3, 4, 3, 47, 34, 32, 26, 33, 3, 27, 36, 0, 2, 0, 48, 49, -1, 7, 14, 14, 31, 3, 4, 3, 47, 34, 32, 26, 33, 3, 27, 37, 0),
+"variants": [Vector2(512, 40), 640.0, 40.0, 4, ExtResource("2_8ln24"), NodePath("HBoxContainer/PlayerLineEdit"), NodePath("ColorRect"), NodePath("HBoxContainer/ColorOptionButton"), NodePath("HBoxContainer/SoundOptionButton"), NodePath("HBoxContainer/PlayButton"), NodePath("HBoxContainer/RemoveButton"), 1, 15, 1.0, 2, Color(1, 1, 1, 0.52156866), 8, 0.5, -320.0, -20.0, 318.0, 20.0, "Navn: ", SubResource("LabelSettings_y057d"), Vector2(200, 0), 3, Color(0, 0, 0, 1), "Spiller", 23, "Farve: ", SubResource("LabelSettings_5bwc8"), 6, "Jingle:", SubResource("LabelSettings_gny55"), 0, "Lyd1", "▶️", "Fjern spiller"],
+"version": 3
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_bqqt6"]
+font_size = 37
+font_color = Color(0.9147983, 0.8156683, 0, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0.20392157, 0.20392157, 0.20392157, 0.8745098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
+bg_color = Color(0, 0, 0, 0.8117647)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wu84c"]
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1go"]
+bg_color = Color(0, 0, 0, 0.8117647)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ln24"]
+font_size = 20
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("player_settings_parent", "start_button", "add_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+player_settings_node = SubResource("PackedScene_rtw2f")
+player_settings_parent = NodePath("MarginContainer/Control/HSplitContainer/PlayerPanelContainer/VBoxContainer/VBoxContainer")
+start_button = NodePath("MarginContainer/Control/StartButton")
+add_player = NodePath("MarginContainer/Control/HSplitContainer/PlayerPanelContainer/VBoxContainer/AddButton")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rtw2f")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.5
+offset_right = 46.5
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+texture = ExtResource("5_oa1go")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Indstillinger"
+label_settings = SubResource("LabelSettings_bqqt6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayerPanelContainer" type="PanelContainer" parent="MarginContainer/Control/HSplitContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtw2f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/PlayerPanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/PlayerPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Spillere"
+label_settings = SubResource("LabelSettings_wu84c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/PlayerPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="AddButton" type="Button" parent="MarginContainer/Control/HSplitContainer/PlayerPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Tilføj spiller"
+
+[node name="GamePanelContainer" type="PanelContainer" parent="MarginContainer/Control/HSplitContainer" node_paths=PackedStringArray("n_rounds_spin", "round_bonus_spin", "cat_button_parent")]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oa1go")
+script = ExtResource("4_wu84c")
+n_rounds_spin = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Rounds/SpinBox")
+round_bonus_spin = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Bonus/SpinBox")
+cat_button = ExtResource("6_rtw2f")
+cat_button_parent = NodePath("MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Spill indstillinger"
+label_settings = SubResource("LabelSettings_8ln24")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Rounds" type="HBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Rounds"]
+layout_mode = 2
+text = "Antal Runder: "
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Rounds"]
+layout_mode = 2
+
+[node name="Bonus" type="HBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Bonus"]
+layout_mode = 2
+text = "Runde Bonus (Kr): "
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Bonus"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Kategorier"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.9137255, 0.8156863, 0, 1)
+theme_override_colors/font_focus_color = Color(0.9137255, 0.8156863, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.9137255, 0.8156863, 0, 1)
+theme_override_colors/font_hover_color = Color(0.9137255, 0.8156863, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9137255, 0.8156863, 0, 1)
+theme_override_constants/h_separation = 10
+theme_override_font_sizes/font_size = 47
+text = "Start Spil"

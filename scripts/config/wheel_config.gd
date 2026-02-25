@@ -44,7 +44,7 @@ func wedge_element_to_str(element: Dictionary):
 	{"type": wedge_type.NORMAL, "amount": 500, "color": Color.YELLOW},
 ]
 
-@export var radius: float = 250.0
+@export var radius: float = 245.0
 @export var wheel_text_offset: float = 80.0
 @export var arc_resolution: int = 12
 @export var spin_duration: float = 4.0

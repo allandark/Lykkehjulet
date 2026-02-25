@@ -22,7 +22,7 @@ button = NodePath("HBoxContainer/ButtonSubmit")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
-color = Color(0, 0, 0, 0.40784314)
+color = Color(0, 0, 0, 0.80784315)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

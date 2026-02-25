@@ -1,17 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4g2trr2fk45n"]
+[gd_scene load_steps=13 format=3 uid="uid://b4g2trr2fk45n"]
 
-[ext_resource type="Texture2D" uid="uid://3b3mj04t5ayi" path="res://textures/bgimage.png" id="1_bw6k5"]
-[ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/wheel_node.tscn" id="1_w5aja"]
+[ext_resource type="Texture2D" uid="uid://brbr50gjldv4r" path="res://textures/bg3.png" id="1_b5spy"]
+[ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/in_game/wheel_node.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://dsjvl8l3c1548" path="res://scripts/game_manager.gd" id="2_onqr8"]
-[ext_resource type="PackedScene" uid="uid://ccgurnuitedh6" path="res://nodes/letter_grid.tscn" id="3_ycayy"]
-[ext_resource type="PackedScene" uid="uid://bw24kj7vqesba" path="res://nodes/input_panel.tscn" id="4_kk2rg"]
+[ext_resource type="PackedScene" uid="uid://ccgurnuitedh6" path="res://nodes/in_game/letter_grid.tscn" id="3_ycayy"]
+[ext_resource type="PackedScene" uid="uid://bw24kj7vqesba" path="res://nodes/in_game/input_panel.tscn" id="4_kk2rg"]
 [ext_resource type="PackedScene" uid="uid://pyjn7cff6j78" path="res://nodes/ui/right_player_panel.tscn" id="4_rurhu"]
 [ext_resource type="PackedScene" uid="uid://svrjg0cwht6i" path="res://nodes/ui/info_box.tscn" id="5_rurhu"]
 [ext_resource type="PackedScene" uid="uid://bf12r2thurlx4" path="res://nodes/ui/yes_no_modal.tscn" id="8_b5spy"]
+[ext_resource type="PackedScene" uid="uid://dbpap68x1uccd" path="res://scenes/main_menu.tscn" id="9_utbpp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rurhu"]
 
 [sub_resource type="FontFile" id="FontFile_rurhu"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -77,7 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_bw6k5")
+texture = ExtResource("1_b5spy")
 
 [node name="LetterGrid" parent="." instance=ExtResource("3_ycayy")]
 layout_mode = 1
@@ -92,13 +96,7 @@ pivot_offset = Vector2(0, 0)
 
 [node name="RightPlayerPanel" parent="." instance=ExtResource("4_rurhu")]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = 0.0
-offset_bottom = 0.0
 
 [node name="InputPanel" parent="." instance=ExtResource("4_kk2rg")]
 layout_mode = 1
@@ -127,6 +125,7 @@ offset_bottom = -79.999664
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
+color = Color(0, 0, 0, 0.80784315)
 
 [node name="RoundPanel" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -152,13 +151,13 @@ horizontal_alignment = 1
 
 [node name="WheelAnchor" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -288.0
+offset_top = -300.0
 offset_right = 317.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -178,6 +177,7 @@ color = Color(0, 0, 0, 0.5803922)
 
 [node name="YesNoModal" parent="." instance=ExtResource("8_b5spy")]
 visible = false
+z_index = 200
 layout_mode = 1
 offset_top = -47.0
 offset_bottom = 47.0
@@ -192,3 +192,4 @@ round_label = NodePath("../RoundPanel/VBoxContainer/RoundLabel")
 category_label = NodePath("../RoundPanel/VBoxContainer/CategoryLabel")
 letter_grid = NodePath("../LetterGrid")
 yes_no_modal = NodePath("../YesNoModal")
+main_menu = ExtResource("9_utbpp")

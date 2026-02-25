@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy0enhk6e2gr4"]
+[gd_scene load_steps=6 format=3 uid="uid://dy0enhk6e2gr4"]
 
 [ext_resource type="FontFile" uid="uid://c8esr4uscmqdr" path="res://fonts/digital-7 (mono).ttf" id="1_7afkn"]
 [ext_resource type="Script" uid="uid://jt3c1q1faika" path="res://scripts/ui/player_container.gd" id="1_ro36e"]
+[ext_resource type="Texture2D" uid="uid://dofjgta7waxaq" path="res://textures/ui_border.png" id="3_ksbrl"]
 
 [sub_resource type="FontFile" id="FontFile_7afkn"]
 subpixel_positioning = 0
@@ -54,55 +55,84 @@ font_size = 23
 font_color = Color(0, 0, 0, 1)
 outline_size = 5
 
-[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("bg_color_rect", "border_rect", "label", "digit_lavels")]
-offset_right = 196.0
-offset_bottom = 104.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="PlayerContainer" type="HBoxContainer" node_paths=PackedStringArray("bg_color_rect", "border_rect", "label", "digit_lavels")]
+custom_minimum_size = Vector2(200, 105)
+offset_right = 192.0
+offset_bottom = 100.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
 script = ExtResource("1_ro36e")
-player_color = Color(0, 0, 1, 1)
-bg_color_rect = NodePath("CenterContainer/MarginContainer/ColorRect")
-border_rect = NodePath("ColorRect")
-label = NodePath("CenterContainer/MarginContainer/VBoxContainer/Label")
-digit_lavels = [NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4/Label"), NodePath("CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5/Label")]
+bg_color_rect = NodePath("MarginContainer/Control/CenterContainer/MarginContainer/BGColorRect")
+border_rect = NodePath("MarginContainer/Control/TextureRect")
+label = NodePath("MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/Label")
+digit_lavels = [NodePath("MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit/Label"), NodePath("MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2/Label"), NodePath("MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3/Label"), NodePath("MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4/Label"), NodePath("MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5/Label")]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Control" type="Control" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+[node name="BorderColorRect" type="ColorRect" parent="MarginContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.78319067, 0.78319025, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -47.0
+offset_right = 93.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/CenterContainer"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer"]
+[node name="BGColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer/MarginContainer"]
 layout_mode = 2
 color = Color(0, 0, 1, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/CenterContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Player Name"
 label_settings = SubResource("LabelSettings_ro36e")
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Digit" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Digit" type="Control" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,7 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6392157)
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit"]
+[node name="Label" type="Label" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,13 +154,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Digit2" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Digit2" type="Control" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,7 +169,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6392157)
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2"]
+[node name="Label" type="Label" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,13 +182,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Digit3" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Digit3" type="Control" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +197,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6392157)
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3"]
+[node name="Label" type="Label" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,13 +210,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Digit4" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Digit4" type="Control" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -195,7 +225,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6392157)
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4"]
+[node name="Label" type="Label" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,13 +238,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Digit5" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Digit5" type="Control" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,7 +253,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6392157)
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5"]
+[node name="Label" type="Label" parent="MarginContainer/Control/CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/Digit5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -235,3 +265,15 @@ theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ksbrl")
+expand_mode = 1

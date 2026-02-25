@@ -3,7 +3,7 @@ extends Node
 @export var player_color: Color
 
 @export var bg_color_rect : ColorRect
-@export var border_rect: ColorRect
+@export var border_rect: TextureRect
 @export var label : Label
 @export var digit_lavels: Array[Label]
 
@@ -26,6 +26,6 @@ func set_balance(value : int):
 
 func set_active(value: bool):
 	if value:
-		border_rect.color = Color.BLACK
+		border_rect.modulate = GameData.selected_border_color
 	else:
-		border_rect.color = Color.BLUE_VIOLET
+		border_rect.modulate = GameData.border_color

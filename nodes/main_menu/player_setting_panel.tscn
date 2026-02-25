@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccs3ou1e5gsf1"]
+
+[ext_resource type="Script" uid="uid://b2dr4veoiynpl" path="res://scripts/main_menu/player_setting_panel.gd" id="1_gny55"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y057d"]
+font_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5bwc8"]
+font_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gny55"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PlayerSettingPanel" type="Panel" node_paths=PackedStringArray("player_name_edit", "color_rect", "color_options", "sound_options", "play_button", "remove_button")]
+custom_minimum_size = Vector2(512, 40)
+offset_right = 640.0
+offset_bottom = 40.0
+size_flags_vertical = 4
+script = ExtResource("1_gny55")
+player_name_edit = NodePath("HBoxContainer/PlayerLineEdit")
+color_rect = NodePath("ColorRect")
+color_options = NodePath("HBoxContainer/ColorOptionButton")
+sound_options = NodePath("HBoxContainer/SoundOptionButton")
+play_button = NodePath("HBoxContainer/PlayButton")
+remove_button = NodePath("HBoxContainer/RemoveButton")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.52156866)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -20.0
+offset_right = 318.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Navn: "
+label_settings = SubResource("LabelSettings_y057d")
+
+[node name="PlayerLineEdit" type="LineEdit" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Spiller"
+max_length = 23
+
+[node name="ColorLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Farve: "
+label_settings = SubResource("LabelSettings_5bwc8")
+
+[node name="ColorOptionButton" type="OptionButton" parent="HBoxContainer"]
+z_index = 6
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+
+[node name="SoundLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Jingle:"
+label_settings = SubResource("LabelSettings_gny55")
+
+[node name="SoundOptionButton" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+selected = 0
+item_count = 1
+popup/item_0/text = "Lyd1"
+popup/item_0/id = 0
+
+[node name="PlayButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "▶️"
+
+[node name="RemoveButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fjern spiller"

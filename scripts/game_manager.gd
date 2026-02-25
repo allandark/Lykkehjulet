@@ -10,19 +10,28 @@ extends Node
 @export var yes_no_modal: YesNoModal
 
 
-@onready var current_player_id: int = GameData.players.size()-1
+
+
+enum GameState{
+	RUNNING,
+	DONE
+}
+
+var game_state: GameState
+var categories: Array[Category]
+var current_player_id: int 
 var current_player : Player
-var current_round : int = 0
+var current_round : int 
 var winner : Player
 var current_wedge: Dictionary
+var round_starting_player_id: int
+var first_turn: bool
 
-var listen_input := false
+var listen_input :bool = false
 
 
 func _ready():
 	wheel.spin_finished.connect(_on_wheel_finished)
-	# info_box.connect("line_done", Callable(self, "_on_line_done"))
-	# info_box.connect("all_done", Callable(self, "_on_all_done"))
 	info_box.connect("on_spin", Callable(self, "_on_spin"))
 	info_box.connect("on_vokal", Callable(self, "_on_vokal"))
 	info_box.connect("on_guess", Callable(self, "_on_guess"))
@@ -30,19 +39,28 @@ func _ready():
 	yes_no_modal.connect("on_button",Callable(self,"_on_modal"))
 
 	input_panel.show_panel(false)
-
+		
 	_setup_game()
 
-func _setup_game():
+func _setup_game():	
+	categories.clear()
+	for i in range(GameData.category_collections.size()):
+		if GameData.category_collections[i].is_selected:
+			for cat in GameData.category_collections[i].categories:
+				categories.append(cat)
+
+
+	round_starting_player_id = randi_range(0, GameData.players.size()-1)
+	current_round = 0
+	first_turn = true
+	game_state = GameState.RUNNING
 	current_player = GameData.players[current_player_id]
 	_reset_round()
 	
 
 func _reset_round():
 	listen_input = false
-	var cat = GameData.categories.get_random_category()
-	letter_grid.setup_category(cat)
-	category_label.text = "Kategori: " + cat.name
+	
 	
 	current_round += 1
 	round_label.text = "Runde: " + str(current_round)
@@ -60,20 +78,40 @@ func _reset_round():
 		
 		var player_text = "[color=%s]%s[/color] vand spilled med: %d Kr" % [GameData.get_color_string(winner.color), winner.name, winner.balance]
 		info_box.show_text(player_text,2)	
-		return
+		info_box.show_text("Tryk enter for at starte et nyt spil",3)	
+		game_state = GameState.DONE
+		# hack - delay listen_input 1 sec
+		var timer = Timer.new()
+		timer.wait_time = 1.0
+		timer.one_shot = true 
+		add_child(timer)
+		timer.timeout.connect(func():
+			listen_input = true
+			timer.queue_free()
+		)
+		timer.start()
+		
+	else:
+		var cat = Category.get_random(categories)
+		letter_grid.setup_category(cat)
+		category_label.text = "Kategori: " + cat.name
+		categories.erase(cat)
 	
-	_next_player()
-	_start_turn()
+		_next_player()
+		_start_turn()
 
 func _next_player():
 	for player in player_panel.players_containers:
 		player.set_active(false)
-	current_player_id = (current_player_id + 1) % GameData.players.size()
+	if first_turn:
+		current_player_id = round_starting_player_id
+		round_starting_player_id = (round_starting_player_id + 1) % GameData.players.size() # update for next turn
+	else: 
+		current_player_id = (current_player_id + 1) % GameData.players.size()
 	current_player = GameData.players[current_player_id]
 	info_box.set_button_states(true)
 	
 		
-
 func _start_turn():
 	player_panel.players_containers[current_player.number-1].set_active(true)
 
@@ -85,9 +123,9 @@ func _start_turn():
 	info_box.set_button_states(true)
 
 	if current_player.balance >= 500:
-		info_box.set_button_state(1, true)
+		info_box.set_button_state(InfoBox.InfoButtonID.VOCAL, true)
 	else:
-		info_box.set_button_state(1, false)
+		info_box.set_button_state(InfoBox.InfoButtonID.VOCAL, false)
 
 func _end_turn()-> bool:
 	if letter_grid.is_solved():
@@ -98,8 +136,9 @@ func _end_turn()-> bool:
 		var text = "[color=%s]%s[/color] vandt runden" % [GameData.get_color_string(current_player.color), current_player.name]
 		info_box.show_text(text, 2)
 		info_box.show_text("Tryk enter for at starte næste runde", 3)
-		listen_input = true
 		info_box.set_button_states(false)
+		listen_input = true				
+		first_turn = true
 		print("solved")
 		return true
 	else:
@@ -116,6 +155,7 @@ func _on_modal(button: YesNoModal.ButtonID):
 		current_player.jokers = clamp(current_player.jokers - 1, 0, 999)		
 		yes_no_modal.show_modal(false)
 		info_box.set_button_states(true)
+		_start_turn()
 	
 	elif button == YesNoModal.ButtonID.NO:
 		yes_no_modal.show_modal(false)
@@ -123,16 +163,21 @@ func _on_modal(button: YesNoModal.ButtonID):
 		_start_turn()
 	
 
-	
-	
+func _switch_to_main_menu():
+	GameData.Scenes.switch_to(GameData.Scenes.main_menu)
 
 
 func _input(event):
 	if not listen_input:
 		return
+	
+	if game_state == GameState.RUNNING:
+		if event.is_action_pressed("ui_accept"):
+			_reset_round()
+	elif game_state == GameState.DONE:
+		call_deferred("_switch_to_main_menu")
+		
 
-	if event.is_action_pressed("ui_accept"):
-		_reset_round()
 
 func _on_input_submit(text: String):
 	var result: bool = false
@@ -159,6 +204,7 @@ func _on_input_submit(text: String):
 			_next_player()
 			
 	_start_turn()
+
 
 func _on_wheel_finished(index):
 	current_wedge = WheelConfig.wedges[index]
@@ -187,12 +233,6 @@ func _on_wheel_finished(index):
 	
 	elif current_wedge["type"] == WheelConfig.wedge_type.JOKER:
 		current_player.jokers += 1
-
-# func _on_line_done(line):
-# 	print("Line finished:", line)
-
-# func _on_all_done():
-# 	print("All lines finished!")
 
 func _on_spin():
 	info_box.clear_line(2)

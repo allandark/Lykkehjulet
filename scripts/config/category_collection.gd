@@ -2,12 +2,14 @@ class_name CategoryCollection
 
 var name: String
 var data: Dictionary
-var categories: Array = [] 
+var categories: Array[Category]
+var is_selected: bool
 
 func _init(_name: String, _data: Dictionary) -> void:
     name = _name
     data = _data
     categories = []
+    is_selected = false
 
     if data.has("categories"):
         for cat in data["categories"]:         
@@ -20,7 +22,3 @@ func get_category(cat_name: String) -> Category:
             return cat
     return null
 
-func get_random_category() -> Category:
-    if categories.size() == 0:
-        return null
-    return categories[randi() % categories.size()]

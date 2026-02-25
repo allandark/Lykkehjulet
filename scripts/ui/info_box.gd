@@ -3,6 +3,12 @@ class_name InfoBox extends ColorRect
 @export var labels : Array[RichTextLabel]
 @export var buttons: Array[Button]
 
+enum InfoButtonID{
+	SPIN,
+	VOCAL,
+	GUESS
+}
+
 var queue: Array = []        
 var full_text: String = ""   
 var label_index: int = 0
@@ -29,18 +35,18 @@ func _ready():
 	add_child(typing_timer)
 	typing_timer.timeout.connect(_on_typing_tick)
 
-	buttons[0].pressed.connect(func(): emit_signal("on_spin"))
-	buttons[1].pressed.connect(func(): emit_signal("on_vokal"))
-	buttons[2].pressed.connect(func(): emit_signal("on_guess"))
+	buttons[InfoButtonID.SPIN].pressed.connect(func(): emit_signal("on_spin"))
+	buttons[InfoButtonID.VOCAL].pressed.connect(func(): emit_signal("on_vokal"))
+	buttons[InfoButtonID.GUESS].pressed.connect(func(): emit_signal("on_guess"))
 
 
 func set_button_states(value: bool):
-	buttons[0].disabled = !value
-	buttons[1].disabled = !value
-	buttons[2].disabled = !value
+	buttons[InfoButtonID.SPIN].disabled = !value
+	buttons[InfoButtonID.VOCAL].disabled = !value
+	buttons[InfoButtonID.GUESS].disabled = !value
 
 func set_button_state(id: int, value: bool):
-	buttons[clamp(id, 0, 2)].disabled = !value
+	buttons[clamp(id, 0, buttons.size())].disabled = !value
 
 func show_text(text: String, line: int):
 	var idx = clamp(line-1, 0, labels.size()-1)
