@@ -15,7 +15,9 @@ func _ready() -> void:
 	player_settings.clear()
 	GameData.players.clear()
 
-	
+	AudioManager.on_fade_finished.connect(_audio_fade_done)
+
+	_setup_audio()
 
 
 	start_button.connect("pressed", Callable(self, "_on_start"))
@@ -23,6 +25,18 @@ func _ready() -> void:
 
 	_create_player()
 	_create_player()
+
+func _audio_fade_done(_bus: AudioManager.BusID):
+	AudioManager.stop(AudioManager.BusID.BACKGROUND, true)
+	AudioManager.set_volume(AudioManager.BusID.BACKGROUND, 0.0)
+	GameData.Scenes.switch_to(GameData.Scenes.transition)
+
+func _setup_audio():
+	AudioManager.set_volume(AudioManager.BusID.BACKGROUND,-12.0)
+	var audio_res = AudioManager.get_resource(GameData.AudioID.THEME_SONG_SEGMENTED)
+	audio_res.current_index = 1
+	AudioManager.play(AudioManager.BusID.BACKGROUND, GameData.AudioID.THEME_SONG_SEGMENTED, AudioResource.Mode.LOOP_VARIANT)
+	
 
 
 func _create_player(_name:String = "Spiller"):
@@ -64,8 +78,9 @@ func _on_start():
 			GameData.colors[player_settings[i].color_id])
 		GameData.players.append(player)
 		
+	AudioManager.fade_volume(AudioManager.BusID.BACKGROUND, -15.0, 1.0) 
 
-	GameData.Scenes.switch_to(GameData.Scenes.transition)
+	
 	
 
 func _on_add_player():

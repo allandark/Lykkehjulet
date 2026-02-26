@@ -1,0 +1,53 @@
+[gd_scene load_steps=24 format=3 uid="uid://epo4hbgg52p"]
+
+[ext_resource type="Script" uid="uid://dtvbcbxn7mg1j" path="res://scripts/audio_manager.gd" id="1_liach"]
+[ext_resource type="Script" uid="uid://bia75a2jbsx3r" path="res://scripts/audio_resource.gd" id="2_ic5jq"]
+[ext_resource type="AudioStream" uid="uid://bt7qbqycfqkmg" path="res://audio/music/theme_song/theme_song_intro.ogg" id="3_if78k"]
+[ext_resource type="AudioStream" uid="uid://c1huw02r478a0" path="res://audio/music/theme_song/theme_song_seg1.ogg" id="4_8igv3"]
+[ext_resource type="AudioStream" uid="uid://cbgvfknrvlsgm" path="res://audio/music/theme_song/theme_song_seg2.ogg" id="5_2y2jw"]
+[ext_resource type="AudioStream" uid="uid://cndirg8w3ybvn" path="res://audio/music/theme_song/theme_song_seg3.ogg" id="6_2y5yn"]
+[ext_resource type="AudioStream" uid="uid://cxg0j2wpxti4d" path="res://audio/music/theme_song/theme_song_seg4.ogg" id="7_oucy0"]
+[ext_resource type="AudioStream" uid="uid://do3cdxs1fsfdp" path="res://audio/music/theme_song/theme_song_seg5.ogg" id="8_cuol6"]
+[ext_resource type="AudioStream" uid="uid://coy86prgkqcqc" path="res://audio/music/theme_song/theme_song_seg6.ogg" id="9_m1k83"]
+[ext_resource type="AudioStream" uid="uid://bipgkn3w0wih0" path="res://audio/music/theme_song/theme_song_seg7.ogg" id="10_oummu"]
+[ext_resource type="AudioStream" uid="uid://chloq8rhxfs7y" path="res://audio/music/theme_song/theme_song_end.ogg" id="11_hssp1"]
+[ext_resource type="AudioStream" uid="uid://bhswonwl2keg8" path="res://audio/music/theme_song/theme_song.ogg" id="12_8igv3"]
+[ext_resource type="AudioStream" uid="uid://cqd76ip5wo86r" path="res://audio/music/theme_song/theme_song_short.ogg" id="13_2y2jw"]
+[ext_resource type="AudioStream" uid="uid://cm672ldhfkrgd" path="res://audio/effects/wof_tick/wof_tick1.ogg" id="14_oummu"]
+[ext_resource type="AudioStream" uid="uid://b48r5tpnywgq0" path="res://audio/effects/wof_tick/wof_tick2.ogg" id="15_hssp1"]
+[ext_resource type="AudioStream" uid="uid://b334hwtsgalky" path="res://audio/effects/wof_tick/wof_tick3.ogg" id="16_8b11i"]
+[ext_resource type="AudioStream" uid="uid://xgbdjjcly4g1" path="res://audio/effects/wof_tick/wof_tick4.ogg" id="17_u6qdm"]
+[ext_resource type="AudioStream" uid="uid://dkg1ftxop6l5f" path="res://audio/effects/wof_tick/wof_tick5.ogg" id="18_f6jxr"]
+[ext_resource type="AudioStream" uid="uid://blm2iagsisyh6" path="res://audio/effects/wof_tick/wof_tick6.ogg" id="19_ovaav"]
+
+[sub_resource type="Resource" id="Resource_8b11i"]
+script = ExtResource("2_ic5jq")
+streams = Array[AudioStream]([ExtResource("3_if78k"), ExtResource("4_8igv3"), ExtResource("5_2y2jw"), ExtResource("6_2y5yn"), ExtResource("7_oucy0"), ExtResource("8_cuol6"), ExtResource("9_m1k83"), ExtResource("10_oummu"), ExtResource("11_hssp1")])
+metadata/_custom_type_script = "uid://bia75a2jbsx3r"
+
+[sub_resource type="Resource" id="Resource_2y5yn"]
+script = ExtResource("2_ic5jq")
+streams = Array[AudioStream]([ExtResource("12_8igv3")])
+metadata/_custom_type_script = "uid://bia75a2jbsx3r"
+
+[sub_resource type="Resource" id="Resource_oucy0"]
+script = ExtResource("2_ic5jq")
+streams = Array[AudioStream]([ExtResource("13_2y2jw")])
+metadata/_custom_type_script = "uid://bia75a2jbsx3r"
+
+[sub_resource type="Resource" id="Resource_thanh"]
+script = ExtResource("2_ic5jq")
+streams = Array[AudioStream]([ExtResource("14_oummu"), ExtResource("15_hssp1"), ExtResource("16_8b11i"), ExtResource("17_u6qdm"), ExtResource("18_f6jxr"), ExtResource("19_ovaav")])
+metadata/_custom_type_script = "uid://bia75a2jbsx3r"
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("bg_audio_player", "effect_audio_player")]
+script = ExtResource("1_liach")
+bg_audio_player = NodePath("BGAudioStreamPlayerA")
+effect_audio_player = NodePath("EffectsAudioStreamPlayerA")
+audio_resources = Array[ExtResource("2_ic5jq")]([SubResource("Resource_8b11i"), SubResource("Resource_2y5yn"), SubResource("Resource_oucy0"), SubResource("Resource_thanh")])
+
+[node name="BGAudioStreamPlayerA" type="AudioStreamPlayer" parent="."]
+bus = &"BGAudio"
+
+[node name="EffectsAudioStreamPlayerA" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"

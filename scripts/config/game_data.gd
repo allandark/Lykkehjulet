@@ -103,8 +103,17 @@ func get_color_string(color: Color):
 
 var selected_border_color = Color(1.0, 1.0, 1.0, 1.0)
 var border_color = Color(0.6, 0.6, 0.6, 0.8)  
-
 var max_player_name_length: int = 14
+
+enum AudioID{
+	# music
+	THEME_SONG_SEGMENTED,
+	THEME_SONG_SHORT,
+	THEME_SONG_FULL,
+	# effects
+	WOF_TICK,
+}
+
 
 
 class Scenes:

@@ -22,3 +22,7 @@ I mappen `game_data` er filen `common.json`, i denne fil kan kategorier udfyldes
 - Ordenes maksimale længe skal være 13 karakterer, ellers skal vi indeles med "-".
 - Totalt kan sætningen maksimalt indeholde 52 karaktere med mellemrum og "-" inkluderet.
 
+
+
+#### convert audio
+ffmpeg -i loop.wav -c:a libvorbis loop.ogg

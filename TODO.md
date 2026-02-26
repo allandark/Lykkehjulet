@@ -1,28 +1,15 @@
-Logic:
-[x] Game loop
-[x] Players
-[x] Vokaler/konsonanter
-[x] Gamedata/kategorier
-[] ingen duplicate kategorier
-[x] joker-implenteret
-[] hvilken spiller efter vunden runde
-[] tilfældig start spiller
 
-start_screen:
-[] vælg spillere/ give navne
-[] vælg "expansion pack"
+intro_screen:
+[] animations
 
 winner_screen:
 [] ui
-[] tilbage til start screen
+[x] tilbage til start screen
 
 Audio:
+[] audio manager
 [] Audio Effects
 [] Baggrundsmusik
 
-Interface:
-[] vokaler/konsonanter
-[] Regler
-
-art:
-[] baggrunds billede
+refactor:
+[] decouple manager
