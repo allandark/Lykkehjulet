@@ -15,6 +15,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(20, 0)
 script = ExtResource("1_frrug")
 letter_rows = [NodePath("CenterContainer/VBoxContainer/HBoxContainer1"), NodePath("CenterContainer/VBoxContainer/HBoxContainer2"), NodePath("CenterContainer/VBoxContainer/HBoxContainer3"), NodePath("CenterContainer/VBoxContainer/HBoxContainer4")]

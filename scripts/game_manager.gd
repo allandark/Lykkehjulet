@@ -8,8 +8,7 @@ extends Node
 @export var category_label: Label
 @export var letter_grid : LetterGrid
 @export var yes_no_modal: YesNoModal
-
-
+@export var winner_panel: WinnerPanel
 
 
 enum GameState{
@@ -38,6 +37,10 @@ func _ready():
 	input_panel.connect("on_submit",Callable(self,"_on_input_submit"))
 	yes_no_modal.connect("on_button",Callable(self,"_on_modal"))
 
+	AudioManager.on_audio_finished.connect(_on_audio_finished)
+	AudioManager.on_fade_finished.connect(_on_fade_finished)
+	winner_panel.show_panel(false)
+
 	input_panel.show_panel(false)
 		
 	_setup_game()
@@ -60,45 +63,18 @@ func _setup_game():
 
 func _reset_round():
 	listen_input = false
-	
-	
+	AudioManager.stop_all()
+	AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.ROUND_END)
 	current_round += 1
 	round_label.text = "Runde: " + str(current_round)
-	if current_round > GameData.n_rounds:
-		# games done
-		info_box.clear_text()
-		info_box.show_text("Spillet er slut!",1)		
-		info_box.set_button_states(false)
-		winner = null
-		for player in GameData.players:
-			if winner == null:
-				winner = player
-			elif player.balance > winner.balance:
-				winner = player
-		
-		var player_text = "[color=%s]%s[/color] vand spilled med: %d Kr" % [GameData.get_color_string(winner.color), winner.name, winner.balance]
-		info_box.show_text(player_text,2)	
-		info_box.show_text("Tryk enter for at starte et nyt spil",3)	
-		game_state = GameState.DONE
-		# hack - delay listen_input 1 sec
-		var timer = Timer.new()
-		timer.wait_time = 1.0
-		timer.one_shot = true 
-		add_child(timer)
-		timer.timeout.connect(func():
-			listen_input = true
-			timer.queue_free()
-		)
-		timer.start()
-		
-	else:
-		var cat = Category.get_random(categories)
-		letter_grid.setup_category(cat)
-		category_label.text = "Kategori: " + cat.name
-		categories.erase(cat)
-	
-		_next_player()
-		_start_turn()
+
+	var cat = Category.get_random(categories)
+	letter_grid.setup_category(cat)
+	category_label.text = "Kategori: " + cat.name
+	categories.erase(cat)
+
+	_next_player()
+	_start_turn()
 
 func _next_player():
 	for player in player_panel.players_containers:
@@ -133,26 +109,67 @@ func _end_turn()-> bool:
 		player_panel.players_containers[current_player.number-1].set_balance(current_player.balance)
 		info_box.clear_line(2)
 		info_box.clear_line(3)
-		var text = "[color=%s]%s[/color] vandt runden" % [GameData.get_color_string(current_player.color), current_player.name]
-		info_box.show_text(text, 2)
-		info_box.show_text("Tryk enter for at starte næste runde", 3)
-		info_box.set_button_states(false)
-		listen_input = true				
-		first_turn = true
+		if current_round == GameData.n_rounds:
+			_end_of_game()
+		else:
+			var text = "[color=%s]%s[/color] vandt runden" % [GameData.get_color_string(current_player.color), current_player.name]
+			info_box.show_text(text, 2)
+			info_box.show_text("Tryk enter for at starte næste runde", 3)
+			info_box.set_button_states(false)
+			listen_input = true				
+			first_turn = true		
+			AudioManager.play(AudioManager.BusID.BACKGROUND, GameData.AudioID.THEME_SONG_SEGMENTED, AudioResource.Mode.LOOP_VARIANT, 5)
+			AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.APPLAUSE)
+		
 		print("solved")
 		return true
 	else:
 		print("not solved")
 		return false
 	
-		
+func _end_of_game():	
+	
+	info_box.clear_text()
+	info_box.show_text("Spillet er slut!",1)		
+	info_box.set_button_states(false)
+	winner = null
+	for player in GameData.players:
+		if winner == null:
+			winner = player
+		elif player.balance > winner.balance:
+			winner = player
+	
+	winner_panel.set_winner_text(winner)
+	winner_panel.show_panel(true)
+
+	game_state = GameState.DONE
+	# hack - delay listen_input 1 sec 	
+	var timer = Timer.new()
+	timer.wait_time = 2.0
+	timer.one_shot = true 
+	add_child(timer)
+	timer.timeout.connect(func():
+		listen_input = true
+		timer.queue_free()
+	)
+	timer.start()
+	AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.APPLAUSE)
+	AudioManager.play(AudioManager.BusID.BACKGROUND, GameData.AudioID.THEME_SONG_FULL, AudioResource.Mode.LOOP_VARIANT, 0)
+
 
 # Events/callbacks
+
+func _on_audio_finished(_bus: AudioManager.BusID):
+	AudioManager.set_volume(AudioManager.BusID.EFFECT, 0.0)
+
+func _on_fade_finished(_bus: AudioManager.BusID):
+	AudioManager.set_volume(AudioManager.BusID.BACKGROUND, 0.0)
+	_switch_to_main_menu()
 
 func _on_modal(button: YesNoModal.ButtonID):
 	
 	if button == YesNoModal.ButtonID.YES:		
-		current_player.jokers = clamp(current_player.jokers - 1, 0, 999)		
+		current_player.jokers = clamp(current_player.jokers - 1, 0, GameData.max_jokers)		
 		yes_no_modal.show_modal(false)
 		info_box.set_button_states(true)
 		_start_turn()
@@ -172,10 +189,11 @@ func _input(event):
 		return
 	
 	if game_state == GameState.RUNNING:
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_pressed("skip_keys"):
 			_reset_round()
 	elif game_state == GameState.DONE:
-		call_deferred("_switch_to_main_menu")
+		if event.is_action_pressed("skip_keys"):
+			AudioManager.fade_volume(AudioManager.BusID.BACKGROUND, -60, 2)			
 		
 
 
@@ -196,14 +214,22 @@ func _on_input_submit(text: String):
 		print("ending round")
 		return
 	if not result:
+		AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.WRONG)
 		if current_player.jokers > 0:
 			input_panel.focus_locked = false
 			yes_no_modal.set_joker(current_player.jokers)
 			yes_no_modal.show_modal(true)
 		else:
 			_next_player()
-			
-	_start_turn()
+	else:
+		AudioManager.play(
+			AudioManager.BusID.EFFECT, 
+			GameData.AudioID.CORRECT,
+			AudioResource.Mode.SINGLE_VARIANT,
+			2)
+	
+	if game_state == GameState.RUNNING:
+		_start_turn()
 
 
 func _on_wheel_finished(index):
@@ -213,13 +239,14 @@ func _on_wheel_finished(index):
 	info_box.set_button_states(true)
 
 	if current_wedge["type"] == WheelConfig.wedge_type.NORMAL:
-		
+		AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.NORMAL_WEDGE)
 		info_box.set_button_states(false)
 		info_box.show_text("Gæt en konsonant", 3)
 		input_panel.set_state(InputPanel.InputPanelState.CONSONANT)
 		input_panel.show_panel(true)
 		# input_box.
 	elif current_wedge["type"] == WheelConfig.wedge_type.BANKRUPT:
+		AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.FALLIT)
 		current_player.balance = 0
 		player_panel.players_containers[current_player.number-1].set_balance(current_player.balance)
 		_end_turn()
@@ -227,12 +254,16 @@ func _on_wheel_finished(index):
 		_start_turn()
 
 	elif current_wedge["type"] == WheelConfig.wedge_type.LOSE_TURN:
+		AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.LOST_TURN)
 		_end_turn()
 		_next_player()
 		_start_turn()
 	
 	elif current_wedge["type"] == WheelConfig.wedge_type.JOKER:
+		AudioManager.play(AudioManager.BusID.EFFECT, GameData.AudioID.JOKER)
 		current_player.jokers += 1
+	
+		
 
 func _on_spin():
 	info_box.clear_line(2)

@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0hokrs510fxu"]
+[gd_scene load_steps=7 format=3 uid="uid://c0hokrs510fxu"]
 
 [ext_resource type="Script" uid="uid://d0bchmcga4e0r" path="res://scripts/transition_scene.gd" id="1_sy15e"]
-[ext_resource type="PackedScene" uid="uid://b4g2trr2fk45n" path="res://scenes/game_scene.tscn" id="2_3e8es"]
+[ext_resource type="Texture2D" uid="uid://cgttbqto4vdki" path="res://textures/bg4.png" id="2_3e8es"]
+[ext_resource type="Texture2D" uid="uid://cfdp07p8tu6tr" path="res://textures/title_flat.png" id="3_t4jg0"]
+[ext_resource type="PackedScene" uid="uid://ccgurnuitedh6" path="res://nodes/in_game/letter_grid.tscn" id="4_p73qk"]
+[ext_resource type="PackedScene" uid="uid://x7elnxdd4lxq" path="res://nodes/in_game/wheel_node.tscn" id="5_p73qk"]
 
-[node name="TransitionToGame" type="Control" node_paths=PackedStringArray("progression_bar")]
+[sub_resource type="LabelSettings" id="LabelSettings_sy15e"]
+font_size = 30
+
+[node name="TransitionToGame" type="Control" node_paths=PackedStringArray("progression_bar", "debug_label", "title_rect", "letter_grid", "wheel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +18,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sy15e")
 progression_bar = NodePath("ProgressBar")
-game_scene = ExtResource("2_3e8es")
+debug_label = NodePath("Label")
+title_rect = NodePath("TextureRect2")
+letter_grid = NodePath("LetterGrid")
+wheel = NodePath("Wheel")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3e8es")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -225.0
+offset_top = 100.0
+offset_right = 225.0
+offset_bottom = 300.0
+grow_horizontal = 2
+texture = ExtResource("3_t4jg0")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(400, 0)
@@ -27,3 +61,45 @@ offset_top = -27.0
 offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 0
+show_percentage = false
+
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fortsæt"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_sy15e")
+
+[node name="LetterGrid" parent="." instance=ExtResource("4_p73qk")]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = -7.999939
+offset_top = 360.0
+offset_right = -7.999939
+offset_bottom = 360.0
+grow_vertical = 1
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(0, 0)
+
+[node name="Wheel" parent="." instance=ExtResource("5_p73qk")]
+visible = false
+position = Vector2(1600, 680)

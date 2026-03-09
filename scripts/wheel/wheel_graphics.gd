@@ -7,7 +7,7 @@ extends Node2D
 var wedge_nodes: Array = []
 
 func create_wedges() -> void:
-	# Clear old wedges
+	
 	for child in wedge_nodes:
 		child.queue_free()
 	wedge_nodes.clear()

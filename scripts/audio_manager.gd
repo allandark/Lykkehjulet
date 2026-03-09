@@ -38,8 +38,16 @@ func get_current_playing(bus: BusID) -> AudioResource:
 			return current_background_audio
 	return null
 
-func play(bus: BusID, sound_id: int, mode: AudioResource.Mode = AudioResource.Mode.ALL_VARIANT):
+func play(
+		bus: BusID, 
+		sound_id: int, 
+		mode: AudioResource.Mode = AudioResource.Mode.SINGLE_VARIANT, 
+		current_index:int = 0, 
+		use_random_variant: bool = false):
+
 	audio_resources[sound_id].mode = mode
+	audio_resources[sound_id].current_index = current_index
+	audio_resources[sound_id].use_random_variant = use_random_variant
 	if bus == BusID.EFFECT:		
 		_configure_stream(audio_resources[sound_id], effect_audio_player)
 		current_effect_audio = audio_resources[sound_id]
@@ -57,7 +65,6 @@ func resume(bus: BusID):
 	elif bus == BusID.BACKGROUND:
 		bg_audio_player.stream_paused = false
 		
-
 func pause(bus: BusID):
 	if bus == BusID.EFFECT:
 		effect_audio_player.stream_paused = true

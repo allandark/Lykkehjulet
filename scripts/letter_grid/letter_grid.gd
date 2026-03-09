@@ -26,7 +26,7 @@ func _ready() -> void:
 		for j in range(row_counts[i]):
 			var letter_instance = letter_scene.instantiate() as Control 
 			
-			letter_instance.set_letter(str(j + 1))		
+			letter_instance.set_letter(" ")		
 			letter_instance.set_hidden(false)	
 			letter_instance.set_unused(true)	
 

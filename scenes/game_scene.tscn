@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://pyjn7cff6j78" path="res://nodes/ui/right_player_panel.tscn" id="4_rurhu"]
 [ext_resource type="PackedScene" uid="uid://svrjg0cwht6i" path="res://nodes/ui/info_box.tscn" id="5_rurhu"]
 [ext_resource type="PackedScene" uid="uid://bf12r2thurlx4" path="res://nodes/ui/yes_no_modal.tscn" id="8_b5spy"]
-[ext_resource type="PackedScene" uid="uid://dbpap68x1uccd" path="res://scenes/main_menu.tscn" id="9_utbpp"]
+[ext_resource type="PackedScene" uid="uid://dg17uav2asl8u" path="res://scenes/winner_panel.tscn" id="8_utbpp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rurhu"]
 
@@ -96,7 +96,10 @@ pivot_offset = Vector2(0, 0)
 
 [node name="RightPlayerPanel" parent="." instance=ExtResource("4_rurhu")]
 layout_mode = 1
+anchors_preset = -1
 offset_left = -300.0
+offset_top = -50.0
+offset_bottom = -100.0
 
 [node name="InputPanel" parent="." instance=ExtResource("4_kk2rg")]
 layout_mode = 1
@@ -151,6 +154,7 @@ horizontal_alignment = 1
 
 [node name="WheelAnchor" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -182,7 +186,20 @@ layout_mode = 1
 offset_top = -47.0
 offset_bottom = 47.0
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("wheel", "info_box", "input_panel", "player_panel", "round_label", "category_label", "letter_grid", "yes_no_modal")]
+[node name="WinnerPanel" parent="." instance=ExtResource("8_utbpp")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("wheel", "info_box", "input_panel", "player_panel", "round_label", "category_label", "letter_grid", "yes_no_modal", "winner_panel")]
 script = ExtResource("2_onqr8")
 wheel = NodePath("../WheelAnchor/Wheel")
 info_box = NodePath("../InfoPanel/InfoBox")
@@ -192,4 +209,4 @@ round_label = NodePath("../RoundPanel/VBoxContainer/RoundLabel")
 category_label = NodePath("../RoundPanel/VBoxContainer/CategoryLabel")
 letter_grid = NodePath("../LetterGrid")
 yes_no_modal = NodePath("../YesNoModal")
-main_menu = ExtResource("9_utbpp")
+winner_panel = NodePath("../WinnerPanel")

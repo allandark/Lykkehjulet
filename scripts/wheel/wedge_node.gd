@@ -8,7 +8,6 @@ var color: Color = Color.WHITE
 var id: int = 0
 @onready var radius: float = WheelConfig.radius
 
-# store angles for use later
 var start_angle: float = 0.0
 var end_angle: float = 0.0
 
@@ -43,10 +42,6 @@ func update_label() -> void:
 	var text_size = Vector2(0,0)
 	if font_ref:
 		text_size = font_ref.get_string_size(label.text)
-		# debug
-		# var rect_pos = label.position
-		# var rect_size = text_size
-		# draw_rect(Rect2(rect_pos, rect_size), Color(0,1,0,0.2))  # semi-transparent green
 	
 	var mid_angle = (start_angle + end_angle) / 2
 	
@@ -58,20 +53,7 @@ func update_label() -> void:
 	
 	offset = offset.rotated(mid_angle)
 
-	# var normalized_angle = fposmod(mid_angle, TAU)
-	# if normalized_angle > PI/2 and normalized_angle < 3*PI/2:
-	# 	label.rotation = mid_angle + PI
-	# 	offset.x = -offset.x  # mirror horizontally
 	label.position = pos - offset	
 	
 	label.rotation = mid_angle
 	
-
-
-
-# func _draw():
-# 	# Draw a radial debug line to the middle of the wedge
-# 	var mid_angle = (start_angle + end_angle) / 2
-# 	var line_length = radius
-# 	var line_end = Vector2(cos(mid_angle), sin(mid_angle)) * line_length
-# 	draw_line(Vector2.ZERO, line_end, Color.WHITE, 2)  # red line

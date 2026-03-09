@@ -29,6 +29,7 @@ func _ready() -> void:
 	vocal_line.focus_exited.connect(_on_line_edit_focus_exited)
 	vocal_line.text_changed.connect(_on_vocal_text_changed)
 	fullword_line.focus_exited.connect(_on_line_edit_focus_exited)
+	fullword_line.text_changed.connect(_on_full_text_changed)
 
 func set_state(_state: InputPanelState):
 	if state != _state:
@@ -89,7 +90,7 @@ func _vocal_is_valid()->bool:
 		return false
 
 func _full_word_is_valid()->bool:
-	if vocal_line.text.length() == 0:
+	if fullword_line.text.length() == 0:
 		return false
 	return true
 
@@ -134,12 +135,17 @@ func _on_consonant_text_changed(value: String):
 	else:
 		button.disabled = true
 
-
 func _on_vocal_text_changed(value: String):
 	if value.length() > 1 and value.length() != 0:
 		vocal_line.text = value[-1]
 		vocal_line.caret_set_column(1)
 	if _vocal_is_valid():
+		button.disabled = false
+	else:
+		button.disabled = true
+
+func _on_full_text_changed(value: String):
+	if _full_word_is_valid():
 		button.disabled = false
 	else:
 		button.disabled = true

@@ -5,13 +5,13 @@ var category_collections: Array[CategoryCollection]
 
 var players: Array[Player] = []
 
-var max_players: int = 8
+var max_players: int = 7
 var min_players: int = 2
 
 
 
-var consonants = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z"]
-var vocals = ["A", "E", "I", "O", "U", "Y", "Æ", "Ø", "Å"]
+var consonants: Array[String] = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z"]
+var vocals: Array[String] = ["A", "E", "I", "O", "U", "Y", "Æ", "Ø", "Å"]
 
 
 var max_rounds: int = 200
@@ -22,6 +22,9 @@ var min_bonus: int = 0
 
 var round_bonus: int = 500
 var n_rounds: int = 3
+var n_start_jokers: int = 0
+
+var max_jokers: int = 20
 
 
 
@@ -112,6 +115,16 @@ enum AudioID{
 	THEME_SONG_FULL,
 	# effects
 	WOF_TICK,
+	ERROR,
+	WIN_GUITAR,
+	CORRECT,
+	WRONG,
+	FALLIT,
+	ROUND_END,
+	APPLAUSE,
+	NORMAL_WEDGE,
+	JOKER,
+	LOST_TURN
 }
 
 
@@ -191,21 +204,3 @@ func load_category_file(path: String) -> void:
 
 	print("Category loaded successfully from: ", path)
 
-
-# func load_categories():
-# 	var file = FileAccess.open("res://game_data/common.json", FileAccess.READ)
-# 	if file:
-# 		var json_text = file.get_as_text()
-# 		file.close()		
-# 		var parser = JSON.new()
-# 		var error_code  = parser.parse(json_text)
-		
-# 		if error_code != OK:
-# 			push_warning("Invalid JSON file, error code: %d" % error_code)
-# 			return  
-# 		var json_dict = parser.get_data()  
-# 		categories = CategoryCollection.new(json_dict["name"], json_dict)
-# 		print("categories loaded successfully!")
-
-# 	else:
-# 		push_error("Failed to open JSON file.")

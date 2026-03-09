@@ -1,0 +1,141 @@
+[gd_scene load_steps=7 format=3 uid="uid://dg17uav2asl8u"]
+
+[ext_resource type="Texture2D" uid="uid://3b3mj04t5ayi" path="res://textures/bgimage.png" id="1_6dgl3"]
+[ext_resource type="Script" uid="uid://5l4qiwn3hj2s" path="res://scenes/winner_panel.gd" id="1_tok8b"]
+[ext_resource type="PackedScene" uid="uid://c8jfk17uvcjfp" path="res://scenes/spot_light.tscn" id="2_874d3"]
+[ext_resource type="Texture2D" uid="uid://cfdp07p8tu6tr" path="res://textures/title_flat.png" id="4_tqytv"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6dgl3"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_874d3"]
+particle_flag_disable_z = true
+angular_velocity_min = -495.9
+angular_velocity_max = 329.00998
+orbit_velocity_min = -1.046
+orbit_velocity_max = 0.68800014
+radial_velocity_min = -741.72003
+radial_velocity_max = 509.92996
+gravity = Vector3(0, 98, 0)
+
+[node name="WinnerPanel" type="TextureRect" node_paths=PackedStringArray("particle_system", "label")]
+z_index = 400
+custom_minimum_size = Vector2(800, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -160.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6dgl3")
+expand_mode = 1
+script = ExtResource("1_tok8b")
+particle_system = NodePath("GPUParticles2D")
+label = NodePath("Control/ColorRect/VBoxContainer/RichTextLabel2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(36, 40)
+amount = 10
+texture = SubResource("CanvasTexture_6dgl3")
+process_material = SubResource("ParticleProcessMaterial_874d3")
+
+[node name="PointLight2D" parent="." instance=ExtResource("2_874d3")]
+visible = false
+position = Vector2(280, 820)
+color = Color(1, 1, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 400.0
+grow_horizontal = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -100.0
+offset_right = 320.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_tqytv")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 317.0
+offset_right = 300.0
+offset_bottom = 556.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.6627451)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 50
+text = "Spillet er slut"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 40
+text = "Spiller X vandt spillet med XXXX Kr"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Control/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 25
+text = "Tryk Enter for at starte et nyt spil"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

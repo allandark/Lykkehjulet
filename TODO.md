@@ -1,15 +1,16 @@
 
 intro_screen:
 [] animations
+[x] hold key to skip
 
-winner_screen:
-[] ui
-[x] tilbage til start screen
+in_game:
+[] winner panel/animations
+[] letter grid ui 
 
-Audio:
-[] audio manager
-[] Audio Effects
-[] Baggrundsmusik
+menu:
+[] start jokers
+[] vocal cost
+[] more settings
 
 refactor:
 [] decouple manager

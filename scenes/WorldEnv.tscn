@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dblrmqr0y0a58"]
+
+[sub_resource type="Environment" id="Environment_omyqt"]
+glow_enabled = true
+
+[node name="WorldEnv" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_omyqt")

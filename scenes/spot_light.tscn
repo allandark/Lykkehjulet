@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8jfk17uvcjfp"]
+
+[ext_resource type="Texture2D" uid="uid://c5grgdxq87bi3" path="res://textures/gray_circle.png" id="1_i1jni"]
+[ext_resource type="Script" uid="uid://ckrs13oojorrd" path="res://scenes/spot_light.gd" id="2_dj4eh"]
+
+[node name="PointLight2D" type="PointLight2D"]
+scale = Vector2(1.8000011, 1)
+color = Color(0.88941336, 0.88941324, 1.540184e-06, 1)
+texture = ExtResource("1_i1jni")
+texture_scale = 0.25
+script = ExtResource("2_dj4eh")
