@@ -31,18 +31,20 @@ var listen_input :bool = false
 
 func _ready():
 	wheel.spin_finished.connect(_on_wheel_finished)
-	info_box.connect("on_spin", Callable(self, "_on_spin"))
-	info_box.connect("on_vokal", Callable(self, "_on_vokal"))
-	info_box.connect("on_guess", Callable(self, "_on_guess"))
-	input_panel.connect("on_submit",Callable(self,"_on_input_submit"))
-	yes_no_modal.connect("on_button",Callable(self,"_on_modal"))
+	info_box.on_spin.connect(_on_spin)
+	info_box.on_vokal.connect(_on_vokal)
+	info_box.on_guess.connect(_on_guess)
+	input_panel.on_submit.connect(_on_input_submit)
+	yes_no_modal.on_button.connect(_on_modal)
 
 	AudioManager.on_audio_finished.connect(_on_audio_finished)
 	AudioManager.on_fade_finished.connect(_on_fade_finished)
 	winner_panel.show_panel(false)
 
+	AudioManager.set_volume(AudioManager.BusID.BACKGROUND, 0)
+	AudioManager.set_volume(AudioManager.BusID.EFFECT, 0)
+
 	input_panel.show_panel(false)
-		
 	_setup_game()
 
 func _setup_game():	
@@ -72,7 +74,7 @@ func _reset_round():
 	letter_grid.setup_category(cat)
 	category_label.text = "Kategori: " + cat.name
 	categories.erase(cat)
-
+	print("reset round")
 	_next_player()
 	_start_turn()
 
@@ -90,7 +92,7 @@ func _next_player():
 		
 func _start_turn():
 	player_panel.players_containers[current_player.number-1].set_active(true)
-
+	print("starting turn")
 	var player_text = "[color=%s]%s[/color]'s tur" % [GameData.get_color_string(current_player.color), current_player.name]
 	info_box.clear_line(1)
 	info_box.clear_line(2)
@@ -98,7 +100,7 @@ func _start_turn():
 	info_box.show_text(player_text,1)
 	info_box.set_button_states(true)
 
-	if current_player.balance >= 500:
+	if current_player.balance >= GameData.vocal_cost:
 		info_box.set_button_state(InfoBox.InfoButtonID.VOCAL, true)
 	else:
 		info_box.set_button_state(InfoBox.InfoButtonID.VOCAL, false)
@@ -275,7 +277,7 @@ func _on_vokal():
 	info_box.set_button_states(false)
 	input_panel.set_state(InputPanel.InputPanelState.VOCAL)
 	input_panel.show_panel(true)
-	current_player.balance -= 500
+	current_player.balance -= GameData.vocal_cost
 	player_panel.players_containers[current_player.number-1].set_balance(current_player.balance)
 
 func _on_guess():

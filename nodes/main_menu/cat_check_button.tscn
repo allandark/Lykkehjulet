@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ds7sk7y3rwox1"]
 
-[ext_resource type="Script" uid="uid://gm5djnc6j5ep" path="res://nodes/main_menu/cat_check_button.gd" id="1_6ceyw"]
+[ext_resource type="Script" uid="uid://gm5djnc6j5ep" path="res://scripts/ui/cat_check_button.gd" id="1_6ceyw"]
 
 [node name="CheckButton" type="CheckButton"]
 focus_mode = 0

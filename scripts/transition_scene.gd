@@ -7,7 +7,7 @@ class_name TransitionScene extends Control
 @export var letter_grid: LetterGrid
 @export var wheel: Wheel
 
-var wait_time: float = 47.0
+var wait_time: float = 45
 var running_timer: Timer
 var elapsed_time :float = 0.0
 
@@ -38,11 +38,13 @@ var timeline = [
 		{"time": 28.5, "action": func(): guess_letter("T")},
 		{"time": 28.5, "action": func(): guess_letter("O")},
 
-		{"time": 30.0, "action": func(): fade_out(letter_grid, 2.0)},
-		{"time": 32.0, "action": func(): fade_in(wheel, 2.0)},
-		{"time": 35.0, "action": func(): spin(wheel, 360*20.0)},
-		{"time": 40.0, "action": func(): move_to(wheel, Vector2(400, 680), 10)},
-		
+		{"time": 30.0, "action": func(): fade_out(letter_grid, 2.0, true)},
+		{"time": 30.0, "action": func(): fade_in(wheel, 2.0)},
+		{"time": 32.0, "action": func(): spin(wheel, 360*20.0)},
+		{"time": 33.0, "action": func(): move_to(wheel, Vector2(400, 680), 10)},
+
+		{"time": 43.0, "action": func(): fade_out(title_rect, 2.0, false)},
+		{"time": 43.1, "action": func(): fade_out(wheel, 2.0, false)},	
 ]
 var current_event = 0
 
@@ -63,6 +65,7 @@ func _ready():
 	running_timer.one_shot = true
 	add_child(running_timer)
 	running_timer.start()
+	running_timer.timeout.connect(_on_running_timeout)
 	reset_timeline()	
 
 	hold_timer = Timer.new()
@@ -88,7 +91,8 @@ func _process(delta: float) -> void:
 	else:
 		progression_bar.visible = false
 
-
+func _on_running_timeout():
+	GameData.Scenes.switch_to(GameData.Scenes.in_game)
 	
 func _on_hold_timeout():	
 	AudioManager.fade_volume(AudioManager.BusID.BACKGROUND, -60, 0.5)
@@ -111,6 +115,7 @@ func _on_audio_fade_finished(_bus: AudioManager.BusID):
 func _on_audio_finished(_bus: AudioManager.BusID):	
 	# AudioManager.set_volume(AudioManager.BusID.BACKGROUND, 0.0)
 	GameData.Scenes.switch_to(GameData.Scenes.in_game)
+	pass
 
 func reset_timeline():
 	elapsed_time = 0.0
@@ -122,9 +127,11 @@ func fade_in(node: Node,  duration: float):
 	var tween = create_tween()
 	tween.tween_property(node, "modulate:a", 1.0, duration)
 
-func fade_out(node: Node,  duration: float):
+func fade_out(node: Node,  duration: float, _hide: bool):
 	var tween = create_tween()
 	tween.tween_property(node, "modulate:a", 0.0, duration)
+	if _hide:
+		node.visible = false
 
 func move_to(node: Node,  _position: Vector2,  duration: float):
 	var tween = create_tween()

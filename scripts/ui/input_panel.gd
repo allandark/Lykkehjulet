@@ -23,6 +23,8 @@ var state : InputPanelState = InputPanelState.CONSONANT
 var state_changed : bool = true;
 
 func _ready() -> void:
+
+
 	button.pressed.connect(_on_button_pressed)
 	consonant_line.focus_exited.connect(_on_line_edit_focus_exited)
 	consonant_line.text_changed.connect(_on_consonant_text_changed)
@@ -144,7 +146,7 @@ func _on_vocal_text_changed(value: String):
 	else:
 		button.disabled = true
 
-func _on_full_text_changed(value: String):
+func _on_full_text_changed(_value: String):	
 	if _full_word_is_valid():
 		button.disabled = false
 	else:

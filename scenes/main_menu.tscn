@@ -47,12 +47,14 @@ bg_color = Color(0, 0, 0, 0.8117647)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wu84c"]
 font_size = 20
+font_color = Color(1, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1go"]
 bg_color = Color(0, 0, 0, 0.8117647)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ln24"]
 font_size = 20
+font_color = Color(1, 1, 0, 1)
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("player_settings_parent", "start_button", "add_player")]
 layout_mode = 3
@@ -109,6 +111,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Indstillinger"
 label_settings = SubResource("LabelSettings_bqqt6")
@@ -131,7 +134,7 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="PlayerPanelContainer" type="PanelContainer" parent="MarginContainer/Control/HSplitContainer"]
-custom_minimum_size = Vector2(700, 0)
+custom_minimum_size = Vector2(700, 400)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rtw2f")
 
@@ -155,15 +158,17 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Tilføj spiller"
 
-[node name="GamePanelContainer" type="PanelContainer" parent="MarginContainer/Control/HSplitContainer" node_paths=PackedStringArray("n_rounds_spin", "round_bonus_spin", "cat_button_parent")]
+[node name="GamePanelContainer" type="PanelContainer" parent="MarginContainer/Control/HSplitContainer" node_paths=PackedStringArray("n_rounds_spin", "round_bonus_spin", "n_jokers_spin", "vocal_cost_spin", "cat_button_parent")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oa1go")
 script = ExtResource("4_wu84c")
 n_rounds_spin = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Rounds/SpinBox")
 round_bonus_spin = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Bonus/SpinBox")
+n_jokers_spin = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Jokers/SpinBox")
+vocal_cost_spin = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Vocal/SpinBox")
 cat_button = ExtResource("6_rtw2f")
-cat_button_parent = NodePath("MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+cat_button_parent = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Categories/ScrollContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer"]
 layout_mode = 2
@@ -177,7 +182,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Spill indstillinger"
+text = "Indstillinger"
 label_settings = SubResource("LabelSettings_8ln24")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -210,22 +215,47 @@ vertical_alignment = 1
 [node name="SpinBox" type="SpinBox" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Bonus"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Vocal" type="HBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Vocal"]
+layout_mode = 2
+text = "Vokal Pris (Kr): "
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Vocal"]
+layout_mode = 2
+
+[node name="Jokers" type="HBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Jokers"]
+layout_mode = 2
+text = "Antal Start Jokers: "
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Jokers"]
+layout_mode = 2
+
+[node name="Categories" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Categories"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "Kategori Samlinger"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Categories"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HSplitContainer/GamePanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Categories/ScrollContainer"]
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="MarginContainer/Control"]

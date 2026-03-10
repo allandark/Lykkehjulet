@@ -20,8 +20,8 @@ func _ready() -> void:
 
 	_setup_audio()
 
-	start_button.connect("pressed", Callable(self, "_on_start"))
-	add_player.connect("pressed", Callable(self, "_on_add_player"))
+	start_button.pressed.connect(_on_start)
+	add_player.pressed.connect(_on_add_player)
 
 	_create_player()
 	_create_player()
@@ -67,6 +67,8 @@ func _on_start():
 	print("--- Config ---")
 	print("Rounds: ", GameData.n_rounds)
 	print("Bonus: ", GameData.round_bonus)
+	print("Starting jokers: ", GameData.n_start_jokers)
+	print("Vocal cost: ", GameData.vocal_cost)
 	print("Player count: ", player_settings.size())
 	for i in range(player_settings.size()):
 		var player = Player.new(

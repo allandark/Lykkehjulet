@@ -57,3 +57,7 @@ placeholder_text = "Fuldt ord"
 layout_mode = 2
 focus_mode = 0
 text = "Godkend"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2

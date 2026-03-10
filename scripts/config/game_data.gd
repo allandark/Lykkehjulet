@@ -9,7 +9,6 @@ var max_players: int = 7
 var min_players: int = 2
 
 
-
 var consonants: Array[String] = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z"]
 var vocals: Array[String] = ["A", "E", "I", "O", "U", "Y", "Æ", "Ø", "Å"]
 
@@ -20,11 +19,13 @@ var min_rounds: int = 1
 var max_bonus: int = 9999
 var min_bonus: int = 0
 
+var max_jokers: int = 20
+
+# Config values
 var round_bonus: int = 500
 var n_rounds: int = 3
 var n_start_jokers: int = 0
-
-var max_jokers: int = 20
+var vocal_cost: int = 500
 
 
 
@@ -34,8 +35,7 @@ var colors: Array[Color] = [
 	Color.GREEN,
 	Color.YELLOW,
 	Color.AQUA,
-	Color.FUCHSIA,
-	Color.LIME,
+	Color.FUCHSIA,	
 	Color.MAROON,
 	Color.NAVY_BLUE,
 	Color.OLIVE,
@@ -49,8 +49,7 @@ var color_labels: Array[String] = [
 	"Grøn",
 	"Gul",
 	"Turkis",
-	"Magenta",
-	"Lime",
+	"Magenta",	
 	"Kastanje",
 	"Marineblå",
 	"Oliven",
@@ -65,8 +64,7 @@ var taken_colors: Array[bool] = [
 	false,
 	false,
 	false,
-	false,
-	false,
+	false,	
 	false,
 	false,
 	false,
@@ -148,7 +146,6 @@ class Scenes:
 func _ready():
 	
 	load_all_categories_from_folder("res://game_data")
-
 	category_collections[0].is_selected = true # TEMP
 	
 	

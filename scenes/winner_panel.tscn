@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dg17uav2asl8u"]
 
 [ext_resource type="Texture2D" uid="uid://3b3mj04t5ayi" path="res://textures/bgimage.png" id="1_6dgl3"]
-[ext_resource type="Script" uid="uid://5l4qiwn3hj2s" path="res://scenes/winner_panel.gd" id="1_tok8b"]
+[ext_resource type="Script" uid="uid://5l4qiwn3hj2s" path="res://scripts/ui/winner_panel.gd" id="1_tok8b"]
 [ext_resource type="PackedScene" uid="uid://c8jfk17uvcjfp" path="res://scenes/spot_light.tscn" id="2_874d3"]
 [ext_resource type="Texture2D" uid="uid://cfdp07p8tu6tr" path="res://textures/title_flat.png" id="4_tqytv"]
 
