@@ -75,12 +75,14 @@ func pause(bus: BusID):
 
 func stop(bus: BusID, instant: bool = false):
 	if bus == BusID.EFFECT:
-		current_effect_audio.finish_current_loop = not instant
+		if current_effect_audio:
+			current_effect_audio.finish_current_loop = not instant
 		_stop_audio(current_effect_audio, effect_audio_player)		
 	
 
 	elif bus == BusID.BACKGROUND:
-		current_background_audio.finish_current_loop = not instant			
+		if current_background_audio:
+			current_background_audio.finish_current_loop = not instant			
 		_stop_audio(current_background_audio, bg_audio_player)
 		
 
@@ -135,14 +137,15 @@ func _configure_stream(audio_res: AudioResource, player: AudioStreamPlayer) -> v
 	
 
 func _stop_audio(audio_res: AudioResource, player: AudioStreamPlayer) -> void:
-	if audio_res.finish_current_loop and player.stream.loop:
-			# Wait until current loop finishes
-			var remaining = player.stream.get_length() - player.get_playback_position()
-			await get_tree().create_timer(remaining).timeout
+	if audio_res: 
+		if audio_res.finish_current_loop and player.stream.loop:
+				# Wait until current loop finishes
+				var remaining = player.stream.get_length() - player.get_playback_position()
+				await get_tree().create_timer(remaining).timeout
 
-	if audio_res.finish_current_loop and audio_res.fade_out_time > 0:
-			_fade_volume(player, -80, audio_res.fade_out_time)
-			await get_tree().create_timer(audio_res.fade_out_time).timeout
+		if audio_res.finish_current_loop and audio_res.fade_out_time > 0:
+				_fade_volume(player, -80, audio_res.fade_out_time)
+				await get_tree().create_timer(audio_res.fade_out_time).timeout
 
 	player.stop()
 

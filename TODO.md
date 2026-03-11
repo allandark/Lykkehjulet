@@ -1,2 +1,1 @@
-[] player jingles
 [] used vocals

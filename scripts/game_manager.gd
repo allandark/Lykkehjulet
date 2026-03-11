@@ -93,13 +93,14 @@ func _next_player():
 func _start_turn():
 	player_panel.players_containers[current_player.number-1].set_active(true)
 	print("starting turn")
-	var player_text = "[color=%s]%s[/color]'s tur" % [GameData.get_color_string(current_player.color), current_player.name]
+	var player_text = "[color=%s]%s[/color]'s tur" % [PlayerColor.get_string(current_player.color), current_player.name]
 	info_box.clear_line(1)
 	info_box.clear_line(2)
 	info_box.clear_line(3)
 	info_box.show_text(player_text,1)
 	info_box.set_button_states(true)
-
+	AudioManager.play(AudioManager.BusID.BACKGROUND, current_player.jingle)
+	
 	if current_player.balance >= GameData.vocal_cost:
 		info_box.set_button_state(InfoBox.InfoButtonID.VOCAL, true)
 	else:
@@ -114,7 +115,7 @@ func _end_turn()-> bool:
 		if current_round == GameData.n_rounds:
 			_end_of_game()
 		else:
-			var text = "[color=%s]%s[/color] vandt runden" % [GameData.get_color_string(current_player.color), current_player.name]
+			var text = "[color=%s]%s[/color] vandt runden" % [PlayerColor.get_string(current_player.color), current_player.name]
 			info_box.show_text(text, 2)
 			info_box.show_text("Tryk enter for at starte næste runde", 3)
 			info_box.set_button_states(false)

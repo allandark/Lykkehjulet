@@ -11,8 +11,10 @@ var player_settings: Array[PlayerSetting]
 func _ready() -> void:
 	AudioManager.stop_all()
 	start_button.disabled = false
-	for i in  range(GameData.taken_colors.size()):
-		GameData.taken_colors[i] = false
+	for i in  range(GameData.player_colors.size()):
+		GameData.player_colors[i].taken = false
+	for i in range(GameData.player_jingles.size()):
+		GameData.player_jingles[i].taken = false
 	player_settings.clear()
 	GameData.players.clear()
 
@@ -47,7 +49,10 @@ func _create_player(_name:String = "Spiller"):
 	var color_id = GameData.get_first_available_color_id()
 	print("Color id: ", color_id)
 	player_setting.set_color(color_id)	
-	player_setting.connect("on_remove",  Callable(self,"_on_remove_player"))
+	var audio_id = GameData.get_first_available_jingle_id()
+	player_setting.set_jingle(audio_id)
+
+	player_setting.on_remove.connect(_on_remove_player)
 
 	player_settings_parent.add_child(player_setting)
 	player_settings.append(player_setting)
@@ -57,7 +62,7 @@ func _on_remove_player(player_setting: PlayerSetting):
 	if player_settings.size() > GameData.min_players:
 		print("Removing player: ", player_setting.player_number)
 
-		GameData.taken_colors[player_setting.color_id] = false
+		GameData.player_colors[player_setting.color_id].taken = false
 		if player_setting in player_settings:
 			player_settings.erase(player_setting) 
 		player_setting.queue_free()
@@ -74,8 +79,9 @@ func _on_start():
 		var player = Player.new(
 			player_settings[i].get_player_name(), 
 			(i+1),
-			GameData.colors[player_settings[i].color_id],
-			GameData.n_start_jokers)
+			GameData.player_colors[player_settings[i].color_id].get_color(),
+			GameData.n_start_jokers,
+			GameData.player_jingles[player_settings[i].sound_id].audio_id) 
 		GameData.players.append(player)
 		
 	AudioManager.fade_volume(AudioManager.BusID.BACKGROUND, -15.0, 1.0) 

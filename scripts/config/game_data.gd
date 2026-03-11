@@ -27,80 +27,39 @@ var n_rounds: int = 3
 var n_start_jokers: int = 0
 var vocal_cost: int = 500
 
-
-
-var colors: Array[Color] = [
-	Color.BLUE, 
-	Color.RED,
-	Color.GREEN,
-	Color.YELLOW,
-	Color.AQUA,
-	Color.FUCHSIA,	
-	Color.MAROON,
-	Color.NAVY_BLUE,
-	Color.OLIVE,
-	Color.TEAL,
-	Color.PURPLE
+var player_colors: Array[PlayerColor] = [
+	PlayerColor.new(0),
+	PlayerColor.new(1),
+	PlayerColor.new(2),
+	PlayerColor.new(3),
+	PlayerColor.new(4),
+	PlayerColor.new(5),
+	PlayerColor.new(6),
+	PlayerColor.new(7),
+	PlayerColor.new(8),
+	PlayerColor.new(9),
+	PlayerColor.new(10)
 ]
 
-var color_labels: Array[String] = [
-	"Blå",
-	"Rød",
-	"Grøn",
-	"Gul",
-	"Turkis",
-	"Magenta",	
-	"Kastanje",
-	"Marineblå",
-	"Oliven",
-	"Blågrøn",
-	"Lilla"
-]
-
-var taken_colors: Array[bool] = [
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,	
-	false,
-	false,
-	false,
-	false		
+var player_jingles: Array[PlayerJingle] = [
+	PlayerJingle.new(AudioID.JINGLE1, "Jingle 1"),
+	PlayerJingle.new(AudioID.JINGLE2, "Jingle 2"),
+	PlayerJingle.new(AudioID.JINGLE3, "Jingle 3"),
+	PlayerJingle.new(AudioID.JINGLE4, "Jingle 4"),
+	PlayerJingle.new(AudioID.JINGLE5, "Jingle 5"),
+	PlayerJingle.new(AudioID.JINGLE6, "Jingle 6"),
+	PlayerJingle.new(AudioID.JINGLE7, "Jingle 7")
 ]
 
 func get_first_available_color_id():
-	for i in range(taken_colors.size()):
-		if not taken_colors[i]:
+	for i in range(player_colors.size()):
+		if not player_colors[i].taken:
 			return i
 
-func get_color_string(color: Color):
-	if color == Color.BLUE:
-		return "blue"
-	elif color == Color.RED:
-		return "red"
-	elif color == Color.GREEN:
-		return "green"
-	elif color == Color.YELLOW:
-		return "yellow"
-	elif color == Color.AQUA:
-		return "aqua"
-	elif color == Color.FUCHSIA:
-		return "fuchsia"
-	elif color == Color.LIME:
-		return "lime"
-	elif color == Color.MAROON:
-		return "maroon"
-	elif color == Color.NAVY_BLUE:
-		return "navy"
-	elif color == Color.OLIVE:
-		return "olive"
-	elif color == Color.PURPLE:
-		return "purple"
-	return ""
-
+func get_first_available_jingle_id():
+	for i in range(player_jingles.size()):
+		if not player_jingles[i].taken:
+			return i
 
 var selected_border_color = Color(1.0, 1.0, 1.0, 1.0)
 var border_color = Color(0.6, 0.6, 0.6, 0.8)  
@@ -122,7 +81,15 @@ enum AudioID{
 	APPLAUSE,
 	NORMAL_WEDGE,
 	JOKER,
-	LOST_TURN
+	LOST_TURN,
+	# jingles
+	JINGLE1,
+	JINGLE2,
+	JINGLE3,
+	JINGLE4,
+	JINGLE5,
+	JINGLE6,
+	JINGLE7
 }
 
 

@@ -21,7 +21,6 @@ buses/default_bus_layout=""
 
 [autoload]
 
-MenuGlobals="*res://scripts/main_menu/menu_globals.gd"
 WheelConfig="*res://scripts/config/wheel_config.gd"
 GameData="*res://scripts/config/game_data.gd"
 AudioManager="*res://scenes/audio_manager.tscn"
