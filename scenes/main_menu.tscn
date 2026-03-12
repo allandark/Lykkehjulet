@@ -134,7 +134,7 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="PlayerPanelContainer" type="PanelContainer" parent="MarginContainer/Control/HSplitContainer"]
-custom_minimum_size = Vector2(700, 400)
+custom_minimum_size = Vector2(800, 400)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rtw2f")
 

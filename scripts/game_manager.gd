@@ -25,6 +25,7 @@ var winner : Player
 var current_wedge: Dictionary
 var round_starting_player_id: int
 var first_turn: bool
+var jingle_timer = null
 
 var listen_input :bool = false
 
@@ -53,8 +54,7 @@ func _setup_game():
 		if GameData.category_collections[i].is_selected:
 			for cat in GameData.category_collections[i].categories:
 				categories.append(cat)
-
-
+	
 	round_starting_player_id = randi_range(0, GameData.players.size()-1)
 	current_round = 0
 	first_turn = true
@@ -87,6 +87,7 @@ func _next_player():
 	else: 
 		current_player_id = (current_player_id + 1) % GameData.players.size()
 	current_player = GameData.players[current_player_id]
+	play_jingle_delayed()
 	info_box.set_button_states(true)
 	
 		
@@ -99,7 +100,8 @@ func _start_turn():
 	info_box.clear_line(3)
 	info_box.show_text(player_text,1)
 	info_box.set_button_states(true)
-	AudioManager.play(AudioManager.BusID.BACKGROUND, current_player.jingle)
+	# play_jingle_delayed()
+	
 	
 	if current_player.balance >= GameData.vocal_cost:
 		info_box.set_button_state(InfoBox.InfoButtonID.VOCAL, true)
@@ -160,7 +162,14 @@ func _end_of_game():
 	AudioManager.play(AudioManager.BusID.BACKGROUND, GameData.AudioID.THEME_SONG_FULL, AudioResource.Mode.LOOP_VARIANT, 0)
 
 
+func play_jingle_delayed(delay_secs: float = 1.5):
+	jingle_timer = get_tree().create_timer(delay_secs)
+	jingle_timer.timeout.connect(_on_jingle_timer_timeout) 		
+
 # Events/callbacks
+
+func _on_jingle_timer_timeout() -> void:
+	AudioManager.play(AudioManager.BusID.BACKGROUND, current_player.jingle)
 
 func _on_audio_finished(_bus: AudioManager.BusID):
 	AudioManager.set_volume(AudioManager.BusID.EFFECT, 0.0)

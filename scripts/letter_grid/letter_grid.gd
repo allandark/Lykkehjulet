@@ -10,6 +10,8 @@ var category : Category
 var row_counts: Array[int] = [11, 14, 14, 11]
 var letter_size = Vector2(32, 32) # TODO: make configurable
 
+var used_vocals = []
+
 
 func _ready() -> void:
 	vbox.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -41,7 +43,8 @@ func _ready() -> void:
 		letter_nodes.append(row_letters)
 	
 
-func setup_category(cat : Category):
+func setup_category(cat : Category):					
+	GameData.used_vocals.clear()
 	_clear_grid()
 	category = cat
 	category_value_index = randi_range(0, category.values.size()-1)	
@@ -73,7 +76,8 @@ func guess_vocal(vocal: String):
 			if col.is_hidden():
 				if col.label.text.to_upper() == vocal.to_upper():
 					col.set_hidden(false)
-					found = true					
+					found = true
+					GameData.used_vocals.append(vocal)					
 	return found
 
 func guess_fullword(word: String):

@@ -86,7 +86,7 @@ func _consonant_is_valid()->bool:
 func _vocal_is_valid()->bool:
 	if vocal_line.text.length() == 0:
 		return false
-	if vocal_line.text[0].to_upper() in GameData.vocals:
+	if vocal_line.text[0].to_upper() in GameData.vocals and not vocal_line.text[0].to_upper() in GameData.used_vocals:
 		return true
 	else:		
 		return false

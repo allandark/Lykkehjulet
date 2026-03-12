@@ -11,7 +11,7 @@ var min_players: int = 2
 
 var consonants: Array[String] = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z"]
 var vocals: Array[String] = ["A", "E", "I", "O", "U", "Y", "Æ", "Ø", "Å"]
-
+var used_vocals: Array[String] = []
 
 var max_rounds: int = 200
 var min_rounds: int = 1
@@ -42,13 +42,20 @@ var player_colors: Array[PlayerColor] = [
 ]
 
 var player_jingles: Array[PlayerJingle] = [
-	PlayerJingle.new(AudioID.JINGLE1, "Jingle 1"),
-	PlayerJingle.new(AudioID.JINGLE2, "Jingle 2"),
-	PlayerJingle.new(AudioID.JINGLE3, "Jingle 3"),
-	PlayerJingle.new(AudioID.JINGLE4, "Jingle 4"),
-	PlayerJingle.new(AudioID.JINGLE5, "Jingle 5"),
-	PlayerJingle.new(AudioID.JINGLE6, "Jingle 6"),
-	PlayerJingle.new(AudioID.JINGLE7, "Jingle 7")
+	PlayerJingle.new(AudioID.JINGLE1, "Guitar 1"),
+	PlayerJingle.new(AudioID.JINGLE2, "Guitar 2"),
+	PlayerJingle.new(AudioID.JINGLE3, "Guitar 3"),
+	PlayerJingle.new(AudioID.JINGLE4, "Guitar 4"),
+	PlayerJingle.new(AudioID.JINGLE5, "Guitar 5"),
+	PlayerJingle.new(AudioID.JINGLE6, "Guitar 6"),
+	PlayerJingle.new(AudioID.JINGLE7, "Guitar 7"),
+	PlayerJingle.new(AudioID.BATIATUS, "Batiatus"),
+	PlayerJingle.new(AudioID.BOB, "Bob Ricketts"),
+	PlayerJingle.new(AudioID.DRAGON_BALL, "Dragon Ball"),
+	PlayerJingle.new(AudioID.EGON, "Egon Olsen"),
+	PlayerJingle.new(AudioID.LAHEY, "Jim Lahey"),
+	PlayerJingle.new(AudioID.RIV, "Ninja Turtles"),
+	PlayerJingle.new(AudioID.SCOTT, "Micheal Scott")
 ]
 
 func get_first_available_color_id():
@@ -89,7 +96,15 @@ enum AudioID{
 	JINGLE4,
 	JINGLE5,
 	JINGLE6,
-	JINGLE7
+	JINGLE7,
+	BATIATUS,
+	BOB,
+	DRAGON_BALL,
+	EGON,
+	LAHEY,
+	MEYER,
+	RIV,
+	SCOTT
 }
 
 
